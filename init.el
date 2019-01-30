@@ -482,9 +482,10 @@ before packages are loaded."
     (eslint-fix-file)
     (revert-buffer t t))
 
-  (add-hook 'js2-mode-hook
-            (lambda ()
-              (add-hook 'after-save-hook #'eslint-fix-file-and-revert)))
+  "save trigger eslint"
+  ;; (add-hook 'js2-mode-hook
+  ;;           (lambda ()
+  ;;             (add-hook 'after-save-hook #'eslint-fix-file-and-revert)))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
