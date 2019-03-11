@@ -66,7 +66,11 @@ This function should only modify configuration layer settings."
      ;; (shell :variables
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
-     spell-checking
+     (spell-checking :variables
+                     ispell-program-name "aspell"
+                     ispell-dictionary "american"
+                     spell-checking-enable-by-default nil
+                     )
      syntax-checking
      ;; version-control
      )
@@ -484,7 +488,7 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
-  "tern"
+  ;; "tern"
   ;; (setq tern-command
         ;; '("node" "/Users/kreedzt/.nvm/versions/node/v10.14.2/bin/tern"
         ;; )
@@ -499,7 +503,11 @@ before packages are loaded."
     (eslint-fix-file)
     (revert-buffer t t))
 
-  "save trigger eslint"
+  "spell-checking config"
+  ;; (setq-default dotspacemacs-configuration-layers
+                ;; '((spell-checking :variables )))
+
+  ;; "save trigger eslint"
   ;; (add-hook 'js2-mode-hook
   ;;           (lambda ()
   ;;             (add-hook 'after-save-hook #'eslint-fix-file-and-revert)))
