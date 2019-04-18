@@ -33,7 +33,9 @@ This function should only modify configuration layer settings."
 
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(html
+   '(python
+     yaml
+     html
      react
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
@@ -44,16 +46,17 @@ This function should only modify configuration layer settings."
      ;; wakatime
      (wakatime :variables
                wakatime-api-key "61055c82-e3d6-46c9-8757-7f9e60019d6b"
-               wakatime-cli-path "/Users/kreedzt/anaconda3/bin/wakatime")
+               wakatime-cli-path "/home/kreedzt/anaconda3/bin/wakatime")
      ;; js
      javascript
-     ;; (javascript :variables javascript-disable-tern-port-files nil)
-     ;; (javascript :variables tern-command '("node" "/Users/kreedzt/.nvm/versions/node/v10.14.2/bin/")
+     ;; (javascript :variables
+                 ;; tern-command '("node" "/home/kreedzt/.nvm/versions/node/v10.15.3/bin/node"))
      ;; helm
      ;; (javascript :variables
                   ;; (javascript :variables javascript-disable-tern-port-files nil)
      ;; (javascript :variables tern-command '("node" "/Users/kreedzt/.nvm/versions/node/v10.14.2/bin/")
-                 ;; )
+     ;; )
+     lsp
      auto-completion
      better-defaults
      emacs-lisp
@@ -82,7 +85,9 @@ This function should only modify configuration layer settings."
    ;; To use a local version of a package, use the `:location' property:
    ;; '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages '(youdao-dictionary)
+   dotspacemacs-additional-packages '(youdao-dictionary
+                                      exec-path-from-shell
+                                      )
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -466,6 +471,8 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
       "-o ControlMaster=auto -o ControlPath='tramp.%%C' -o ControlPersist=no")
 (delete-selection-mode t)
 (add-hook 'prog-mode-hook 'spacemacs/toggle-hungry-delete-on)
+(setq-default js2-basic-offset 2)
+(setq-default js-indent-level 2)
 
 (setq configuration-layer-elpa-archives
     '(("melpa-cn" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")
@@ -478,7 +485,6 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
 This function is called only while dumping Spacemacs configuration. You can
 `require' or `load' the libraries of your choice that will be included in the
 dump."
-  ;; (require 'hungry-delete-mode)
 
   )
 
@@ -490,8 +496,13 @@ Put your configuration code here, except for variables that should be set
 before packages are loaded."
   ;; "tern"
   ;; (setq tern-command
-        ;; '("node" "/Users/kreedzt/.nvm/versions/node/v10.14.2/bin/tern"
-        ;; )
+         ;; '("node" "/Users/kreedzt/.nvm/versions/node/v10.14.2/bin/tern"
+  ;; )
+  ;; (setq powerline-default-separator 'arrow)
+  "Fix env"
+  (when (memq window-system '(mac ns x))
+    (exec-path-from-shell-initialize))
+
   "Eslint fix file"
   (defun eslint-fix-file ()
     (interactive)
@@ -565,7 +576,7 @@ This function is called at the very end of Spacemacs initialization."
     ("#dc322f" "#cb4b16" "#b58900" "#546E00" "#B4C342" "#00629D" "#2aa198" "#d33682" "#6c71c4")))
  '(package-selected-packages
    (quote
-    (web-mode tagedit slim-mode scss-mode sass-mode pug-mode impatient-mode helm-css-scss haml-mode emmet-mode counsel-css company-web web-completion-data add-node-modules-path youdao-dictionary names chinese-word-at-point yasnippet-snippets ws-butler writeroom-mode winum which-key wgrep web-beautify wakatime-mode volatile-highlights vi-tilde-fringe uuidgen use-package unfill toc-org symon string-inflection spaceline-all-the-icons solarized-theme smex smeargle rjsx-mode restart-emacs request rainbow-delimiters prettier-js popwin persp-mode pcre2el password-generator paradox overseer orgit org-projectile org-present org-pomodoro org-mime org-download org-bullets org-brain open-junk-file neotree nameless mwim move-text mmm-mode markdown-toc magit-svn magit-gitflow macrostep lorem-ipsum livid-mode link-hint json-navigator json-mode js2-refactor js-doc ivy-yasnippet ivy-xref ivy-purpose ivy-hydra indent-guide hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-make google-translate golden-ratio gnuplot gitignore-templates gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md fuzzy font-lock+ flyspell-correct-ivy flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-org evil-numbers evil-nerd-commenter evil-matchit evil-magit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-escape evil-ediff evil-cleverparens evil-args evil-anzu eval-sexp-fu elisp-slime-nav editorconfig dumb-jump dotenv-mode doom-modeline diminish define-word counsel-projectile company-tern company-statistics column-enforce-mode clean-aindent-mode centered-cursor-mode auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile aggressive-indent ace-window ace-link ac-ispell)))
+    (yapfify stickyfunc-enhance pytest pyenv-mode py-isort pippel pipenv pyvenv pip-requirements live-py-mode importmagic epc ctable concurrent deferred helm-pydoc helm-gtags helm-cscope xcscope ggtags cython-mode counsel-gtags company-anaconda anaconda-mode pythonic yaml-mode web-mode tagedit slim-mode scss-mode sass-mode pug-mode impatient-mode helm-css-scss haml-mode emmet-mode counsel-css company-web web-completion-data add-node-modules-path youdao-dictionary names chinese-word-at-point yasnippet-snippets ws-butler writeroom-mode winum which-key wgrep web-beautify wakatime-mode volatile-highlights vi-tilde-fringe uuidgen use-package unfill toc-org symon string-inflection spaceline-all-the-icons solarized-theme smex smeargle rjsx-mode restart-emacs request rainbow-delimiters prettier-js popwin persp-mode pcre2el password-generator paradox overseer orgit org-projectile org-present org-pomodoro org-mime org-download org-bullets org-brain open-junk-file neotree nameless mwim move-text mmm-mode markdown-toc magit-svn magit-gitflow macrostep lorem-ipsum livid-mode link-hint json-navigator json-mode js2-refactor js-doc ivy-yasnippet ivy-xref ivy-purpose ivy-hydra indent-guide hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-make google-translate golden-ratio gnuplot gitignore-templates gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md fuzzy font-lock+ flyspell-correct-ivy flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-org evil-numbers evil-nerd-commenter evil-matchit evil-magit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-escape evil-ediff evil-cleverparens evil-args evil-anzu eval-sexp-fu elisp-slime-nav editorconfig dumb-jump dotenv-mode doom-modeline diminish define-word counsel-projectile company-tern company-statistics column-enforce-mode clean-aindent-mode centered-cursor-mode auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile aggressive-indent ace-window ace-link ac-ispell)))
  '(pos-tip-background-color "#eee8d5")
  '(pos-tip-foreground-color "#586e75")
  '(smartrep-mode-line-active-bg (solarized-color-blend "#859900" "#eee8d5" 0.2))
