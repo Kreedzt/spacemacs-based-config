@@ -33,7 +33,10 @@ This function should only modify configuration layer settings."
 
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(typescript
+   '(
+     (typescript
+      :variables typescript-backend 'lsp
+      )
      sql
      html
      react
@@ -48,7 +51,9 @@ This function should only modify configuration layer settings."
                wakatime-api-key "61055c82-e3d6-46c9-8757-7f9e60019d6b"
                wakatime-cli-path "/Users/kreedzt/anaconda3/bin/wakatime")
      ;; js
-     javascript
+     (javascript
+      :variables javascript-backend 'lsp
+      )
      ;; (javascript :variables javascript-disable-tern-port-files nil)
      ;; (javascript :variables tern-command '("node" "/Users/kreedzt/.nvm/versions/node/v10.14.2/bin/")
      ;; helm
@@ -57,6 +62,7 @@ This function should only modify configuration layer settings."
      ;; (javascript :variables tern-command '("node" "/Users/kreedzt/.nvm/versions/node/v10.14.2/bin/")
                  ;; )
      auto-completion
+     lsp
      better-defaults
      emacs-lisp
      git
