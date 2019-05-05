@@ -62,7 +62,11 @@ This function should only modify configuration layer settings."
      ;; (javascript :variables tern-command '("node" "/Users/kreedzt/.nvm/versions/node/v10.14.2/bin/")
                  ;; )
      auto-completion
-     lsp
+     (lsp :variables
+          lsp-ui-sideline-enable nil
+          lsp-ui-peek-enable t
+          lsp-ui-remap-xref-keybindings t
+      )
      better-defaults
      emacs-lisp
      git
@@ -107,7 +111,7 @@ This function should only modify configuration layer settings."
    ;; (default is `used-only')
    dotspacemacs-install-packages 'used-only))
 
-(global-linum-mode t)
+;;(global-linum-mode t)
 
 (defun dotspacemacs/init ()
   "Initialization:
@@ -378,7 +382,7 @@ It should only modify the values of Spacemacs settings."
    ;;                       text-mode
    ;;   :size-limit-kb 1000)
    ;; (default nil)
-   dotspacemacs-line-numbers nil
+   dotspacemacs-line-numbers t
 
    ;; Code folding method. Possible values are `evil' and `origami'.
    ;; (default 'evil)
@@ -487,7 +491,6 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
 This function is called only while dumping Spacemacs configuration. You can
 `require' or `load' the libraries of your choice that will be included in the
 dump."
-  ;; (require 'hungry-delete-mode)
 
   )
 
