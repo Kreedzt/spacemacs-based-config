@@ -52,10 +52,10 @@ This function should only modify configuration layer settings."
      neotree
      org
      ;; wakatime
-     ;; (wakatime :variables
-     ;;           wakatime-api-key "61055c82-e3d6-46c9-8757-7f9e60019d6b"
-     ;;           wakatime-cli-path "c:/Python27/Scripts/wakatime"
-     ;;           )
+     (wakatime :variables
+               wakatime-api-key "61055c82-e3d6-46c9-8757-7f9e60019d6b"
+               wakatime-cli-path "c:/tools/Anaconda3/Scripts/wakatime.exe"
+               )
      ;; (shell :variables
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
