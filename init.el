@@ -52,10 +52,10 @@ This function should only modify configuration layer settings."
      neotree
      org
      ;; wakatime
-     (wakatime :variables
-               wakatime-api-key "61055c82-e3d6-46c9-8757-7f9e60019d6b"
-               wakatime-cli-path "c:/Python27/Scripts/wakatime"
-               )
+     ;; (wakatime :variables
+     ;;           wakatime-api-key "61055c82-e3d6-46c9-8757-7f9e60019d6b"
+     ;;           wakatime-cli-path "c:/Python27/Scripts/wakatime"
+     ;;           )
      ;; (shell :variables
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
@@ -77,7 +77,9 @@ This function should only modify configuration layer settings."
    dotspacemacs-frozen-packages '()
 
    ;; A list of packages that will not be installed and loaded.
-   dotspacemacs-excluded-packages '()
+   dotspacemacs-excluded-packages '(
+                                    tern company-tern
+                                    )
 
    ;; Defines the behaviour of Spacemacs when installing packages.
    ;; Possible values are `used-only', `used-but-keep-unused' and `all'.
@@ -453,6 +455,8 @@ It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
 (setq tramp-ssh-controlmaster-options
       "-o ControlMaster=auto -o ControlPath='tramp.%%C' -o ControlPersist=no")
+(delete-selection-mode t)
+(add-hook 'prog-mode-hook 'spacemacs/toggle-hungry-delete-on)
 (setq configuration-layer-elpa-archives
     '(("melpa-cn" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")
       ("org-cn"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/org/")
@@ -472,10 +476,21 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
-  (when (display-graphic-p)
-    (dolist (charset '(kana han cjk-misc bopomofo))
-      (set-fontset-font (frame-parameter nil 'font) charset
-                        (font-spec :family "microsoft yahei" :size 14))))
+
+  "设置windows中文字体"
+  (when (configuration-layer/layer-usedp 'chinese)
+    (when (and (spacemacs/system-is-mac) window-system)
+      (spacemacs//set-monospaced-font "Source Code Pro" "Hiragino Sans GB" 14 16)))
+
+  (when (and (spacemacs/system-is-mswindows) window-system)
+    (setq ispell-program-name "aspell")
+    (setq w32-pass-alt-to-system nil)
+    (setq w32-apps-modifier 'super)
+    (dolist (charset '(kana han symbol cjk-misc bopomofo))
+      (set-fontset-font (frame-parameter nil 'font)
+                        charset
+                        (font-spec :family "Microsoft Yahei" :size 14))))
+
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
