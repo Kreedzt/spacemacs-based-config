@@ -477,8 +477,8 @@ configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
 
-  (require 'hungry-delete-mode)
-  (global-hungry-delete-mode)
+  (require 'hungry-delete)
+  (global-hungry-delete-mode t)
 
   "设置windows中文字体"
   (when (configuration-layer/layer-usedp 'chinese)
