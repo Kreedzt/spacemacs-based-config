@@ -579,6 +579,8 @@ before packages are loaded."
   ;;             (add-hook 'after-save-hook #'eslint-fix-file-and-revert)))
   )
 
+(setq custom-file (expand-file-name "custom.el" dotspacemacs-directory))
+(load custom-file 'no-error 'no-message)
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
 (defun dotspacemacs/emacs-custom-settings ()
