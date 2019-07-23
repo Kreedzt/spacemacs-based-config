@@ -34,12 +34,10 @@ This function should only modify configuration layer settings."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(nginx
-     (typescript
-      :variables
-      typescript-backend 'lsp
-      typescript-indent-level 2
-      typescript-expr-indent-offset 2
-      )
+     (typescript :variables
+                 typescript-fmt-on-save nil
+                 typescript-fmt-tool 'prettier-js
+                 typescript-backend 'lsp)
      sql
      (html :variables
            css-enable-lsp t
@@ -52,7 +50,12 @@ This function should only modify configuration layer settings."
      ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
      ;; `M-m f e R' (Emacs style) to install them.
      ;; ----------------------------------------------------------------
-     ivy
+     emoji
+     ranger
+     colors
+     dap
+     prodigy
+     (ivy :variables ivy-enable-advanced-buffer-information nil)
      ;; wakatime
      (wakatime :variables
                wakatime-api-key "61055c82-e3d6-46c9-8757-7f9e60019d6b"
@@ -61,13 +64,6 @@ This function should only modify configuration layer settings."
      (javascript
       :variables javascript-backend 'lsp
       )
-     ;; (javascript :variables javascript-disable-tern-port-files nil)
-     ;; (javascript :variables tern-command '("node" "/Users/kreedzt/.nvm/versions/node/v10.14.2/bin/")
-     ;; helm
-     ;; (javascript :variables
-                  ;; (javascript :variables javascript-disable-tern-port-files nil)
-     ;; (javascript :variables tern-command '("node" "/Users/kreedzt/.nvm/versions/node/v10.14.2/bin/")
-                 ;; )
      auto-completion
      (lsp :variables
           lsp-ui-sideline-enable nil
@@ -76,7 +72,13 @@ This function should only modify configuration layer settings."
       )
      better-defaults
      emacs-lisp
-     git
+     (git :variables
+          git-magit-status-fullscreen t
+          magit-push-always-verify nil
+          magit-save-repository-buffers 'dontask
+          magit-revert-buffers 'silent
+          magit-refs-show-commit-count 'all
+          magit-revision-show-gravatars nil)
      markdown
      ;; multiple-cursors
      neotree
@@ -85,13 +87,17 @@ This function should only modify configuration layer settings."
      ;; (shell :variables
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
-     (spell-checking :variables
-                     ispell-program-name "aspell"
-                     ispell-dictionary "american"
-                     spell-checking-enable-by-default nil
-                     )
-     syntax-checking
-     ;; version-control
+     ;; (spell-checking :variables
+     ;;                 ispell-program-name "aspell"
+     ;;                 ispell-dictionary "american"
+     ;;                 spell-checking-enable-by-default nil
+     ;;                 )
+     (spell-checking :variables spell-checking-enable-by-default nil)
+     (syntax-checking :variables
+                      syntax-checking-enable-by-default nil
+                      syntax-checking-enable-tooltips nil)
+     (spacemacs-layouts :variables layouts-enable-autosave nil
+                        layouts-autosave-delay 300)
      )
 
    ;; List of additional packages that will be installed without being
@@ -544,8 +550,9 @@ before packages are loaded."
     (revert-buffer t t))
 
   "为tsx-mode禁用flycheck"
-  (add-hook 'typescript-tsx-mode
-            (flycheck-mode nil))
+  ;; (add-hook 'typescript-tsx-mode
+  ;;           (flycheck-mode nil))
+
 
 
   "spell-checking config"
