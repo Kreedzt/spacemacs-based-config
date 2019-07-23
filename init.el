@@ -117,20 +117,20 @@ This function should only modify configuration layer settings."
    ;; A list of packages that will not be installed and loaded.
    dotspacemacs-excluded-packages '(
                                     org-projectile org-brain magit-gh-pulls magit-gitflow  evil-mc realgud tern company-tern
-                    evil-args evil-ediff evil-exchange evil-unimpaired
-                    evil-indent-plus volatile-highlights smartparens
-                    spaceline skewer-mode rainbow-delimiters
-                    highlight-indentation vi-tilde-fringe eyebrowse ws-butler
-                    org-bullets smooth-scrolling org-repo-todo org-download org-timer
-                    livid-mode git-gutter git-gutter-fringe  evil-escape
-                    leuven-theme gh-md evil-lisp-state spray lorem-ipsum symon
-                    ac-ispell ace-jump-mode auto-complete auto-dictionary
-                    clang-format define-word google-translate disaster epic
-                    fancy-battery org-present orgit orglue spacemacs-theme
-                    helm-flyspell flyspell-correct-helm clean-aindent-mode
-                    helm-c-yasnippet ace-jump-helm-line helm-make magithub
-                    helm-themes helm-swoop helm-spacemacs-help smeargle
-                    ido-vertical-mode flx-ido company-quickhelp ivy-rich helm-purpose
+                                    evil-args evil-ediff evil-exchange evil-unimpaired
+                                    evil-indent-plus volatile-highlights smartparens
+                                    spaceline skewer-mode rainbow-delimiters
+                                    highlight-indentation vi-tilde-fringe eyebrowse ws-butler
+                                    org-bullets smooth-scrolling org-repo-todo org-download org-timer
+                                    livid-mode git-gutter git-gutter-fringe  evil-escape
+                                    leuven-theme gh-md evil-lisp-state spray lorem-ipsum symon
+                                    ac-ispell ace-jump-mode auto-complete auto-dictionary
+                                    clang-format define-word google-translate disaster epic
+                                    fancy-battery org-present orgit orglue spacemacs-theme
+                                    helm-flyspell flyspell-correct-helm clean-aindent-mode
+                                    helm-c-yasnippet ace-jump-helm-line helm-make magithub
+                                    helm-themes helm-swoop helm-spacemacs-help smeargle
+                                    ido-vertical-mode flx-ido company-quickhelp ivy-rich helm-purpose
                                     )
 
    ;; Defines the behaviour of Spacemacs when installing packages.
