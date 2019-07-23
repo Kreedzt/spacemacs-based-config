@@ -43,7 +43,7 @@
         ;; cider
         ;; editorconfig
         ;; robe
-        exec-path-from-shell
+        ;; exec-path-from-shell
         lsp-mode
         typescript-mode
         ))
@@ -55,7 +55,8 @@
   (progn
     (defun zilongshanren-refresh-imenu-index ()
       (when (or (eq major-mode 'js2-mode)
-                (eq major-mode 'typescript-mode))
+                (eq major-mode 'typescript-mode)
+                (eq major-mode 'typescript-tsx-mode))
         (progn
           (setq imenu-create-index-function 'js2-imenu-make-index)
 
@@ -76,11 +77,11 @@
     :commands (compile-dwim-run compile-dwim-compile)
     :init))
 
-(defun zilongshanren-programming/init-exec-path-from-shell ()
-  (use-package exec-path-from-shell
-    :init
-    (when (memq window-system '(mac ns))
-      (exec-path-from-shell-initialize))))
+;; (defun zilongshanren-programming/init-exec-path-from-shell ()
+;;   (use-package exec-path-from-shell
+;;     :init
+;;     (when (memq window-system '(mac ns))
+;;       (exec-path-from-shell-initialize))))
 
 (defun zilongshanren-programming/init-caps-lock ()
   (use-package caps-lock
@@ -199,8 +200,9 @@
   (add-to-list 'auto-mode-alist '("\\.tern-project\\'" . json-mode))
   (add-to-list 'auto-mode-alist '("\\.fire\\'" . json-mode))
   (add-to-list 'auto-mode-alist '("\\.fire.meta\\'" . json-mode))
-  (spacemacs/set-leader-keys-for-major-mode 'json-mode
-    "ti" 'my-toggle-web-indent))
+  ;; (spacemacs/set-leader-keys-for-major-mode 'json-mode
+  ;;   "ti" 'my-toggle-web-indent)
+  )
 
 
 
@@ -292,8 +294,9 @@
 
 (defun zilongshanren-programming/post-init-js2-mode ()
   (progn
-    (add-hook 'js2-mode-hook 'my-setup-develop-environment)
-    (add-hook 'web-mode-hook 'my-setup-develop-environment)
+    ;; (add-hook 'js2-mode-hook 'my-setup-develop-environment)
+
+    ;; (add-hook 'web-mode-hook 'my-setup-develop-environment)
 
     (spacemacs|define-jump-handlers js2-mode)
     (add-hook 'spacemacs-jump-handlers-js2-mode 'etags-select-find-tag-at-point)
