@@ -77,31 +77,9 @@ comment box."
 
   (setq indent-tabs-mode nil))
 
-(defun zilongshanren/load-yasnippet ()
-  (interactive)
-  (unless yas-global-mode
-    (progn
-      (yas-global-mode 1)
-      (setq my-snippet-dir (expand-file-name "~/.spacemacs.d/snippets"))
-      (setq yas-snippet-dirs '(my-snippet-dir))
-      (yas-load-directory my-snippet-dir)
-      (setq yas-wrap-around-region t)))
-  (yas-minor-mode 1))
-
 (defun conditionally-enable-lispy ()
   (when (eq this-command 'eval-expression)
     (lispy-mode 1)))
-
-(defun cmake-rename-buffer ()
-  "Renames a CMakeLists.txt buffer to cmake-<directory name>."
-  (interactive)
-  (when (and (buffer-file-name)
-             (string-match "CMakeLists.txt" (buffer-name)))
-    (setq parent-dir (file-name-nondirectory
-                      (directory-file-name
-                       (file-name-directory (buffer-file-name)))))
-    (setq new-buffer-name (concat "cmake-" parent-dir))
-    (rename-buffer new-buffer-name t)))
 
 (defun my-ts-mode-hook ()
   (when (eq major-mode 'typescript-mode)

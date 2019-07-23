@@ -17,6 +17,8 @@
   :evil-leader "oti")
 
 (add-hook 'term-mode-hook 'zilongshanren/ash-term-hooks)
+(delete-selection-mode t)
+(add-hook 'prog-mode-hook 'spacemacs/toggle-hungry-delete-on)
 
 
 ;; reformat your json file, it requires python

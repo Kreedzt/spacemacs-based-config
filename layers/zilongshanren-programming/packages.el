@@ -27,7 +27,7 @@
         js2-refactor
         json-mode
         ;; racket-mode
-        yasnippet
+        ;; yasnippet
         web-mode
         js-doc
         ;; lua-mode
@@ -81,36 +81,6 @@
     :init
     (when (memq window-system '(mac ns))
       (exec-path-from-shell-initialize))))
-
-(defun zilongshanren-programming/post-init-robe ()
-  (progn
-    (add-hook 'inf-ruby-mode-hook 'spacemacs/toggle-auto-completion-on)
-    (defun zilongshanren/ruby-send-current-line (&optional print)
-      "Send the current line to the inferior Ruby process."
-      (interactive "P")
-      (ruby-send-region
-       (line-beginning-position)
-       (line-end-position))
-      (when print (ruby-print-result)))
-
-    (defun zilongshanren/ruby-send-current-line-and-go ()
-      (interactive)
-      (zilongshanren/ruby-send-current-line)
-      (ruby-switch-to-inf t))
-
-    (defun zilongshanren/start-inf-ruby-and-robe ()
-      (interactive)
-      (when (not (get-buffer "*ruby*"))
-        (inf-ruby))
-      (robe-start))
-
-    (dolist (mode '(ruby-mode enh-ruby-mode))
-      (spacemacs/set-leader-keys-for-major-mode mode
-        "sb" 'ruby-send-block
-        "sB" 'ruby-send-buffer
-        "sl" 'zilongshanren/ruby-send-current-line
-        "sL" 'zilongshanren/ruby-send-current-line-and-go
-        "sI" 'zilongshanren/start-inf-ruby-and-robe))))
 
 (defun zilongshanren-programming/init-caps-lock ()
   (use-package caps-lock
@@ -206,24 +176,24 @@
 
 
 
-(defun zilongshanren-programming/post-init-yasnippet ()
-  (progn
-    (set-face-background 'secondary-selection "gray")
+;; (defun zilongshanren-programming/post-init-yasnippet ()
+;;   (progn
+;;     (set-face-background 'secondary-selection "gray")
     
-    (with-eval-after-load 'yasnippet
-      (progn
-        (define-key yas-keymap [(tab)]       (yas-filtered-definition 'yas-next-field))
-        (define-key yas-keymap (kbd "TAB")   (yas-filtered-definition 'yas-next-field))))
+;;     (with-eval-after-load 'yasnippet
+;;       (progn
+;;         (define-key yas-keymap [(tab)]       (yas-filtered-definition 'yas-next-field))
+;;         (define-key yas-keymap (kbd "TAB")   (yas-filtered-definition 'yas-next-field))))
 
-    (setq-default yas-prompt-functions '(yas-ido-prompt yas-dropdown-prompt))
-    (mapc #'(lambda (hook) (remove-hook hook 'spacemacs/load-yasnippet)) '(prog-mode-hook
-                                                                      org-mode-hook
-                                                                      markdown-mode-hook))
+;;     (setq-default yas-prompt-functions '(yas-ido-prompt yas-dropdown-prompt))
+;;     (mapc #'(lambda (hook) (remove-hook hook 'spacemacs/load-yasnippet)) '(prog-mode-hook
+;;                                                                       org-mode-hook
+;;                                                                       markdown-mode-hook))
 
-    (spacemacs/add-to-hooks 'zilongshanren/load-yasnippet '(prog-mode-hook
-                                                            markdown-mode-hook
-                                                            org-mode-hook))
-    ))
+;;     (spacemacs/add-to-hooks 'zilongshanren/load-yasnippet '(prog-mode-hook
+;;                                                             markdown-mode-hook
+;;                                                             org-mode-hook))
+;;     ))
 
 (defun zilongshanren-programming/post-init-json-mode ()
   (add-to-list 'auto-mode-alist '("\\.tern-project\\'" . json-mode))
@@ -277,19 +247,6 @@
   (use-package cmake-font-lock
     :defer t))
 
-(defun zilongshanren-programming/init-google-c-style ()
-  (use-package google-c-style
-    :init (add-hook 'c-mode-common-hook 'google-set-c-style)))
-
-(defun zilongshanren-programming/post-init-cmake-mode ()
-  (progn
-    (spacemacs/declare-prefix-for-mode 'cmake-mode
-                                       "mh" "docs")
-    (spacemacs/set-leader-keys-for-major-mode 'cmake-mode
-      "hd" 'cmake-help)
-    (add-hook 'cmake-mode-hook (function cmake-rename-buffer))))
-
-
 (defun zilongshanren-programming/post-init-flycheck ()
   (with-eval-after-load 'flycheck
     (progn
@@ -304,26 +261,26 @@
 (defun zilongshanren-programming/post-init-js2-refactor ()
   (progn
     
-(defun js2r-toggle-object-property-access-style ()
-  "Toggle js object property access style."
-  (interactive)
-  (js2r--guard)
-  (js2r--wait-for-parse
-   (save-excursion
-     (let ((node (js2-node-at-point)))
-       (if (js2-string-node-p node)
-           (let* ((start (js2-node-abs-pos node))
-                  (end (+ start (js2-node-len node))))
-             (when (memq (char-before start) '(?\[))
-               (save-excursion
-                 (goto-char (-  end 1)) (delete-char 2)
-                 (goto-char (+ start 1)) (delete-char -2) (insert "."))))
-         (let* ((start (js2-node-abs-pos node))
-                (end (+ start (js2-node-len node))))
-           (when (memq (char-before start) '(?.))
-             (save-excursion
-               (goto-char end) (insert "\']")
-               (goto-char start) (delete-char -1) (insert "[\'")))))))))
+    (defun js2r-toggle-object-property-access-style ()
+      "Toggle js object property access style."
+      (interactive)
+      (js2r--guard)
+      (js2r--wait-for-parse
+       (save-excursion
+         (let ((node (js2-node-at-point)))
+           (if (js2-string-node-p node)
+               (let* ((start (js2-node-abs-pos node))
+                      (end (+ start (js2-node-len node))))
+                 (when (memq (char-before start) '(?\[))
+                   (save-excursion
+                     (goto-char (-  end 1)) (delete-char 2)
+                     (goto-char (+ start 1)) (delete-char -2) (insert "."))))
+             (let* ((start (js2-node-abs-pos node))
+                    (end (+ start (js2-node-len node))))
+               (when (memq (char-before start) '(?.))
+                 (save-excursion
+                   (goto-char end) (insert "\']")
+                   (goto-char start) (delete-char -1) (insert "[\'")))))))))
 
     ;; (spacemacs/set-leader-keys-for-major-mode 'js2-mode
     ;;   "r>" 'js2r-forward-slurp
@@ -448,43 +405,6 @@
     ;;   )
     :defer t
     ))
-
-(defun zilongshanren-programming/post-init-cc-mode ()
-  (progn
-    (setq company-backends-c-mode-common '((company-dabbrev-code :with company-keywords company-gtags company-etags)
-                                           company-files company-dabbrev))
-    (spacemacs/set-leader-keys-for-major-mode 'c++-mode
-      "gd" 'etags-select-find-tag-at-point)
-
-
-    (add-hook 'c++-mode-hook 'my-setup-develop-environment)
-    (add-hook 'c-mode-hook 'my-setup-develop-environment)
-
-
-    ;; http://stackoverflow.com/questions/23553881/emacs-indenting-of-c11-lambda-functions-cc-mode
-    (defadvice c-lineup-arglist (around my activate)
-      "Improve indentation of continued C++11 lambda function opened as argument."
-      (setq ad-return-value
-            (if (and (equal major-mode 'c++-mode)
-                     (ignore-errors
-                       (save-excursion
-                         (goto-char (c-langelem-pos langelem))
-                         ;; Detect "[...](" or "[...]{". preceded by "," or "(",
-                         ;;   and with unclosed brace.
-                         (looking-at ".*[(,][ \t]*\\[[^]]*\\][ \t]*[({][^}]*$"))))
-                0                       ; no additional indent
-              ad-do-it)))               ; default behavior
-
-
-    (setq c-default-style "linux") ;; set style to "linux"
-    (setq c-basic-offset 4)
-    (c-set-offset 'substatement-open 0)
-    ;; (with-eval-after-load 'c++-mode
-    ;;   (define-key c++-mode-map (kbd "s-.") 'company-ycmd)
-    ;;   )
-    )
-
-  )
 
 (defun zilongshanren-programming/init-flycheck-clojure ()
   (use-package flycheck-clojure

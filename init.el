@@ -509,10 +509,6 @@ It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
 (setq tramp-ssh-controlmaster-options
       "-o ControlMaster=auto -o ControlPath='tramp.%%C' -o ControlPersist=no")
-(delete-selection-mode t)
-(add-hook 'prog-mode-hook 'spacemacs/toggle-hungry-delete-on)
-(setq-default js2-basic-offset 2)
-(setq-default js-indent-level 2)
 
 (setq configuration-layer-elpa-archives
     '(("melpa-cn" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")
