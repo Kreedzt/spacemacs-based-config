@@ -98,6 +98,8 @@ This function should only modify configuration layer settings."
                       syntax-checking-enable-tooltips nil)
      (spacemacs-layouts :variables layouts-enable-autosave nil
                         layouts-autosave-delay 300)
+     ;; custom layer
+     zilongshanren
      )
 
    ;; List of additional packages that will be installed without being
