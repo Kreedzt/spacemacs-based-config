@@ -15,35 +15,35 @@
 (setq zilongshanren-programming-packages
       '(
         css-mode
-        paredit
+        ;; paredit
         lispy
         caps-lock
-        cmake-font-lock
-        cmake-mode
+        ;; cmake-font-lock
+        ;; cmake-mode
         flycheck
         (nodejs-repl-eval :location local)
         (compile-dwim :location local)
         js2-mode
         js2-refactor
         json-mode
-        racket-mode
+        ;; racket-mode
         yasnippet
         web-mode
         js-doc
-        lua-mode
-        (cc-mode :location built-in)
+        ;; lua-mode
+        ;; (cc-mode :location built-in)
         ;; flycheck-clojure
         ;; etags-select
-        (python :location built-in)
+        ;; (python :location built-in)
         (emacs-lisp :location built-in)
         ;; clojure-mode
         company
         (eldoc :location built-in)
         dumb-jump
         graphviz-dot-mode
-        cider
+        ;; cider
         ;; editorconfig
-        robe
+        ;; robe
         exec-path-from-shell
         lsp-mode
         typescript-mode
@@ -234,18 +234,6 @@
                                                             org-mode-hook))
     ))
 
-(defun zilongshanren-programming/post-init-racket-mode ()
-  (progn
-    (eval-after-load 'racket-repl-mode
-      '(progn
-         (define-key racket-repl-mode-map (kbd "]") nil)
-         (define-key racket-repl-mode-map (kbd "[") nil)))
-
-    (add-hook 'racket-mode-hook #'(lambda () (lispy-mode 1)))
-    (add-hook 'racket-repl-mode-hook #'(lambda () (lispy-mode t)))
-    ;; (add-hook 'racket-repl-mode-hook #'(lambda () (smartparens-mode t)))
-    ))
-
 (defun zilongshanren-programming/post-init-json-mode ()
   (add-to-list 'auto-mode-alist '("\\.tern-project\\'" . json-mode))
   (add-to-list 'auto-mode-alist '("\\.fire\\'" . json-mode))
@@ -271,24 +259,27 @@
       (add-hook 'scheme-mode-hook (lambda () (lispy-mode 1)))
       (add-hook 'cider-repl-mode-hook (lambda () (lispy-mode 1)))
       )
-    :config
-    (progn
-      (push '(cider-repl-mode . ("[`'~@]+" "#" "#\\?@?")) lispy-parens-preceding-syntax-alist)
+    ;; :config
+    ;; (progn
+    ;;   (push '(cider-repl-mode . ("[`'~@]+" "#" "#\\?@?")) lispy-parens-preceding-syntax-alist)
 
-      (spacemacs|hide-lighter lispy-mode)
-      (define-key lispy-mode-map (kbd "M-s") 'lispy-splice)
-      (define-key lispy-mode-map (kbd "s-k") 'paredit-splice-sexp-killing-backward)
+    ;;   (spacemacs|hide-lighter lispy-mode)
+    ;;   (define-key lispy-mode-map (kbd "M-s") 'lispy-splice)
+    ;;   (define-key lispy-mode-map (kbd "s-k") 'paredit-splice-sexp-killing-backward)
 
-      (with-eval-after-load 'cider-repl
-        (define-key cider-repl-mode-map (kbd "C-s-j") 'cider-repl-newline-and-indent))
+    ;;   (with-eval-after-load 'cider-repl
+    ;;     (define-key cider-repl-mode-map (kbd "C-s-j") 'cider-repl-newline-and-indent))
 
-      (add-hook
-       'minibuffer-setup-hook
-       'conditionally-enable-lispy)
-      (define-key lispy-mode-map (kbd "s-m") 'lispy-mark-symbol)
-      (define-key lispy-mode-map (kbd "s-u") 'lispy-undo)
-      (define-key lispy-mode-map (kbd "s-1") 'lispy-describe-inline)
-      (define-key lispy-mode-map (kbd "s-2") 'lispy-arglist-inline))))
+    ;;   (add-hook
+    ;;    'minibuffer-setup-hook
+    ;;    'conditionally-enable-lispy)
+    ;;   (define-key lispy-mode-map (kbd "s-m") 'lispy-mark-symbol)
+    ;;   (define-key lispy-mode-map (kbd "s-u") 'lispy-undo)
+    ;;   (define-key lispy-mode-map (kbd "s-1") 'lispy-describe-inline)
+    ;;   (define-key lispy-mode-map (kbd "s-2") 'lispy-arglist-inline)
+    ;;   )
+    )
+  )
 
 
 (defun zilongshanren-programming/init-cmake-font-lock ()
@@ -343,11 +334,13 @@
                (goto-char end) (insert "\']")
                (goto-char start) (delete-char -1) (insert "[\'")))))))))
 
-    (spacemacs/set-leader-keys-for-major-mode 'js2-mode
-      "r>" 'js2r-forward-slurp
-      "r<" 'js2r-forward-barf
-      "r." 'js2r-toggle-object-property-access-style
-      "rep" 'js2r-expand-call-args)))
+    ;; (spacemacs/set-leader-keys-for-major-mode 'js2-mode
+    ;;   "r>" 'js2r-forward-slurp
+    ;;   "r<" 'js2r-forward-barf
+    ;;   "r." 'js2r-toggle-object-property-access-style
+    ;;   "rep" 'js2r-expand-call-args)
+    )
+  )
 
 (defun zilongshanren-programming/post-init-js2-mode ()
   (progn
@@ -369,7 +362,7 @@
     (font-lock-add-keywords 'js2-mode
                             '(("\\<\\(cc\\)\\>" 1 font-lock-type-face)))
 
-    (spacemacs/declare-prefix-for-mode 'js2-mode "ms" "repl")
+    ;; (spacemacs/declare-prefix-for-mode 'js2-mode "ms" "repl")
 
     (with-eval-after-load 'js2-mode
       (progn
@@ -389,9 +382,9 @@
         (setq-default js2-auto-indent-p t)
 
         (setq-default js2-bounce-indent nil)
-        (setq-default js-indent-level 4)
-        (setq-default js2-basic-offset 4)
-        (setq-default js-switch-indent-offset 4)
+        (setq-default js-indent-level 2)
+        (setq-default js2-basic-offset 2)
+        (setq-default js-switch-indent-offset 2)
         ;; Let flycheck handle parse errors
         (setq-default js2-mode-show-parse-errors nil)
         (setq-default js2-mode-show-strict-warnings nil)
@@ -400,19 +393,19 @@
 
         (add-hook 'web-mode-hook 'my-web-mode-indent-setup)
 
-        (spacemacs/set-leader-keys-for-major-mode 'js2-mode
-          "ti" 'my-toggle-web-indent)
-        (spacemacs/set-leader-keys-for-major-mode 'js-mode
-          "ti" 'my-toggle-web-indent)
-        (spacemacs/set-leader-keys-for-major-mode 'web-mode
-          "ti" 'my-toggle-web-indent)
-        (spacemacs/set-leader-keys-for-major-mode 'css-mode
-          "ti" 'my-toggle-web-indent)
+        ;; (spacemacs/set-leader-keys-for-major-mode 'js2-mode
+        ;;   "ti" 'my-toggle-web-indent)
+        ;; (spacemacs/set-leader-keys-for-major-mode 'js-mode
+        ;;   "ti" 'my-toggle-web-indent)
+        ;; (spacemacs/set-leader-keys-for-major-mode 'web-mode
+        ;;   "ti" 'my-toggle-web-indent)
+        ;; (spacemacs/set-leader-keys-for-major-mode 'css-mode
+        ;;   "ti" 'my-toggle-web-indent)
 
-        (spacemacs/declare-prefix-for-mode 'js2-mode "mt" "toggle")
-        (spacemacs/declare-prefix-for-mode 'js-mode "mt" "toggle")
-        (spacemacs/declare-prefix-for-mode 'web-mode "mt" "toggle")
-        (spacemacs/declare-prefix-for-mode 'css-mode "mt" "toggle")
+        ;; (spacemacs/declare-prefix-for-mode 'js2-mode "mt" "toggle")
+        ;; (spacemacs/declare-prefix-for-mode 'js-mode "mt" "toggle")
+        ;; (spacemacs/declare-prefix-for-mode 'web-mode "mt" "toggle")
+        ;; (spacemacs/declare-prefix-for-mode 'css-mode "mt" "toggle")
 
 
         ))
@@ -453,14 +446,15 @@
 (defun zilongshanren-programming/init-nodejs-repl-eval ()
   (use-package nodejs-repl-eval
     :commands (nodejs-repl-eval-buffer nodejs-repl-eval-dwim nodejs-repl-eval-function)
-    :init
-    (progn
-      (spacemacs/declare-prefix-for-mode 'js2-mode
-                                         "ms" "REPL")
-      (spacemacs/set-leader-keys-for-major-mode 'js2-mode
-        "sb" 'nodejs-repl-eval-buffer
-        "sf" 'nodejs-repl-eval-function
-        "sd" 'nodejs-repl-eval-dwim))
+    ;; :init
+    ;; (progn
+    ;;   (spacemacs/declare-prefix-for-mode 'js2-mode
+    ;;                                      "ms" "REPL")
+    ;;   (spacemacs/set-leader-keys-for-major-mode 'js2-mode
+    ;;     "sb" 'nodejs-repl-eval-buffer
+    ;;     "sf" 'nodejs-repl-eval-function
+    ;;     "sd" 'nodejs-repl-eval-dwim)
+    ;;   )
     :defer t
     ))
 
@@ -513,8 +507,10 @@
     (setq c-default-style "linux") ;; set style to "linux"
     (setq c-basic-offset 4)
     (c-set-offset 'substatement-open 0)
-    (with-eval-after-load 'c++-mode
-      (define-key c++-mode-map (kbd "s-.") 'company-ycmd)))
+    ;; (with-eval-after-load 'c++-mode
+    ;;   (define-key c++-mode-map (kbd "s-.") 'company-ycmd)
+    ;;   )
+    )
 
   )
 
@@ -523,70 +519,6 @@
     :defer t
     :init
     (eval-after-load 'flycheck '(flycheck-clojure-setup))))
-
-(defun zilongshanren-programming/post-init-ycmd ()
-  (progn
-    (setq ycmd-tag-files 'auto)
-    (setq ycmd-request-message-level -1)
-    (set-variable 'ycmd-server-command `("python" ,(expand-file-name "~/Github/ycmd/ycmd/__main__.py")))
-    (setq company-backends-c-mode-common '((company-c-headers
-                                            company-dabbrev-code
-                                            company-keywords
-                                            company-gtags :with company-yasnippet)
-                                           company-files company-dabbrev ))
-
-    (zilongshanren|toggle-company-backends company-ycmd)
-    (eval-after-load 'ycmd
-      '(spacemacs|hide-lighter ycmd-mode))
-
-    (spacemacs/set-leader-keys-for-major-mode 'c-mode
-      "tb" 'zilong/company-toggle-company-ycmd)
-    (spacemacs/set-leader-keys-for-major-mode 'c++-mode
-      "tb" 'zilong/company-toggle-company-ycmd)))
-
-;; when many project has the need to use tags, I will give etags-table and etags-update a try
-(defun zilongshanren-programming/init-etags-select ()
-  (use-package etags-select
-    :init
-    (progn
-      (define-key evil-normal-state-map (kbd "gf")
-        (lambda () (interactive) (find-tag (find-tag-default-as-regexp))))
-
-      (define-key evil-normal-state-map (kbd "gb") 'pop-tag-mark)
-
-      (define-key evil-normal-state-map (kbd "gn")
-        (lambda () (interactive) (find-tag last-tag t)))
-
-      (evilified-state-evilify etags-select-mode etags-select-mode-map)
-      (spacemacs/set-leader-keys-for-major-mode 'js2-mode
-        "gd" 'etags-select-find-tag-at-point))))
-
-(defun zilongshanren-programming/init-gulpjs ()
-  (use-package gulpjs
-    :init
-    (progn
-      (defun zilong/build-engine ()
-        (interactive)
-        (gulpjs-start-task-with-file-name "~/Github/fireball/app.js"))
-
-      (spacemacs/set-leader-keys "ags" 'gulpjs-start-task)
-      (spacemacs/set-leader-keys "agS" 'zilong/build-engine)
-      (spacemacs/set-leader-keys "agr" 'gulpjs-restart-task))))
-
-
-(defun zilongshanren-programming/init-paredit ()
-  (use-package paredit
-    :commands (paredit-wrap-round
-               paredit-wrap-square
-               paredit-wrap-curly
-               paredit-splice-sexp-killing-backward)
-    :init
-    (progn
-
-      (bind-key* "s-(" #'paredit-wrap-round)
-      (bind-key* "s-[" #'paredit-wrap-square)
-      (bind-key* "s-{" #'paredit-wrap-curly)
-      )))
 
 (defun zilongshanren-programming/post-init-company ()
   (progn
