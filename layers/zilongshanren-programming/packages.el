@@ -39,7 +39,6 @@
         ;; clojure-mode
         company
         (eldoc :location built-in)
-        dumb-jump
         graphviz-dot-mode
         ;; cider
         ;; editorconfig
@@ -151,14 +150,6 @@
   (with-eval-after-load 'graphviz-dot-mode
       (require 'company-keywords)
       (push '(graphviz-dot-mode  "digraph" "node" "shape" "subgraph" "label" "edge" "bgcolor" "style" "record") company-keywords-alist)))
-
-(defun zilongshanren-programming/post-init-dumb-jump ()
-  (setq dumb-jump-selector 'ivy)
-  (defun my-dumb-jump ()
-    (interactive)
-    (evil-set-jump)
-    (dumb-jump-go))
-  (global-set-key (kbd "C-s-g") 'my-dumb-jump))
 
 (defun zilongshanren-programming/post-init-clojure-mode ()
   )
@@ -456,25 +447,6 @@
     ;;     "sd" 'nodejs-repl-eval-dwim)
     ;;   )
     :defer t
-    ))
-
-(defun zilongshanren-programming/post-init-lua-mode ()
-  (progn
-    (add-hook 'lua-mode-hook 'evil-matchit-mode)
-    ;; (add-hook 'lua-mode-hook 'smartparens-mode)
-    (setq lua-indent-level 2)
-
-    ;; add lua language, basic, string and table keywords.
-    ;; (with-eval-after-load 'lua-mode
-    ;;   (require 'company-keywords)
-    ;;   (push '(lua-mode  "setmetatable" "local" "function" "and" "break" "do" "else" "elseif" "self" "resume" "yield"
-    ;;                     "end" "false" "for" "function" "goto" "if" "nil" "not" "or" "repeat" "return" "then" "true"
-    ;;                     "until" "while" "__index" "dofile" "getmetatable" "ipairs" "pairs" "print" "rawget" "status"
-    ;;                     "rawset" "select" "_G" "assert" "collectgarbage" "error" "pcall" "coroutine"
-    ;;                     "rawequal" "require" "load" "tostring" "tonumber" "xpcall" "gmatch" "gsub"
-    ;;                     "rep" "reverse" "sub" "upper" "concat" "pack" "insert" "remove" "unpack" "sort"
-    ;;                     "lower") company-keywords-alist))
-
     ))
 
 (defun zilongshanren-programming/post-init-cc-mode ()
