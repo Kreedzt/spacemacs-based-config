@@ -92,19 +92,19 @@ comment box."
         (flycheck-disable-checker 'javascript-eslint)))))
 
 
-(defun my-js2-mode-hook ()
-  (progn
-    (define-key js2-mode-map "\C-ci" 'js-doc-insert-function-doc-snippet)
-    (define-key js2-mode-map "@" 'js-doc-insert-tag)
-    (modify-syntax-entry ?_ "w")
-    (which-function-mode t)
-    (setq imenu-create-index-function 'js2-imenu-make-index)
+;; (defun my-js2-mode-hook ()
+;;   (progn
+;;     (define-key js2-mode-map "\C-ci" 'js-doc-insert-function-doc-snippet)
+;;     (define-key js2-mode-map "@" 'js-doc-insert-tag)
+;;     (modify-syntax-entry ?_ "w")
+;;     (which-function-mode t)
+;;     (setq imenu-create-index-function 'js2-imenu-make-index)
 
-    (setq mode-name "JS2")
+;;     (setq mode-name "JS2")
 
-    ;; (spacemacs/toggle-syntax-checking-on)
-    (setq forward-sexp-function nil)
-    (set (make-local-variable 'semantic-mode) nil)))
+;;     ;; (spacemacs/toggle-syntax-checking-on)
+;;     (setq forward-sexp-function nil)
+;;     (set (make-local-variable 'semantic-mode) nil)))
 
 (defun my-which-function ()
   ;; clean the imenu cache

@@ -244,11 +244,6 @@
     )
   )
 
-
-(defun zilongshanren-programming/init-cmake-font-lock ()
-  (use-package cmake-font-lock
-    :defer t))
-
 (defun zilongshanren-programming/post-init-flycheck ()
   (with-eval-after-load 'flycheck
     (progn
@@ -380,18 +375,6 @@
 
 (defun zilongshanren-programming/post-init-tagedit ()
   (add-hook 'web-mode-hook (lambda () (tagedit-mode 1))))
-
-;; For each extension, define a function zilongshanren/init-<extension-name>
-;;
-(defun zilongshanren-programming/init-doxymacs ()
-  "Initialize doxymacs"
-  (use-package doxymacs
-    :init
-    (add-hook 'c-mode-common-hook 'doxymacs-mode)
-    :config
-    (progn
-      (add-hook 'font-lock-mode-hook 'my-doxymacs-font-lock-hook)
-      (spacemacs|hide-lighter doxymacs-mode))))
 
 ;; https://atlanis.net/blog/posts/nodejs-repl-eval.html
 (defun zilongshanren-programming/init-nodejs-repl-eval ()

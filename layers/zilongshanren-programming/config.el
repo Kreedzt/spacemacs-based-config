@@ -20,6 +20,13 @@
 (delete-selection-mode t)
 (add-hook 'prog-mode-hook 'spacemacs/toggle-hungry-delete-on)
 
+"解决fontlock耗时问题"
+"@see: https://www.emacswiki.org/emacs/FontLockSpeed"
+;; (setq font-lock-support-mode 'jit-lock-mode)
+;; (setq jit-lock-stealth-time 16
+;;       jit-lock-defer-contextually t
+;;       jit-lock-stealth-nice 0.5)
+;; (setq-default font-lock-multiline t)
 
 ;; reformat your json file, it requires python
 (defun beautify-json ()
