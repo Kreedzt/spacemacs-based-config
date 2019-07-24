@@ -134,9 +134,9 @@
   (setq python-shell-interpreter "python"))
 
 (defun zilongshanren-programming/post-init-js-doc ()
-  (setq js-doc-mail-address "guanghui8827@gmail.com"
-        js-doc-author (format "Guanghui Qu <%s>" js-doc-mail-address)
-        js-doc-url "http://www.zilongshanren.com"
+  (setq js-doc-mail-address "zhaozisong1@live.com@gmail.com"
+        js-doc-author (format "Kreedzt <%s>" js-doc-mail-address)
+        js-doc-url "https://github.com/Kreedzt"
         js-doc-license "MIT")
 
   )

@@ -28,6 +28,14 @@
 ;;       jit-lock-stealth-nice 0.5)
 ;; (setq-default font-lock-multiline t)
 
+"解决LSP报错问题"
+"@see: https://emacs-china.org/t/tide-javascript/7068/24"
+(setq lsp--silent-errors
+      '(
+        -32800                          ;default error in lsp-mode
+        -32603                          ;error that type in {...}
+        ))
+
 ;; reformat your json file, it requires python
 (defun beautify-json ()
   (interactive)
