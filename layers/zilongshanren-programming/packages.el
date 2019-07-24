@@ -302,7 +302,7 @@
     (setq company-backends-js-mode '((company-dabbrev-code :with company-keywords company-etags)
                                      company-files company-dabbrev))
 
-    (add-hook 'js2-mode-hook 'my-js2-mode-hook)
+    ;; (add-hook 'js2-mode-hook 'my-js2-mode-hook)
 
     ;; add your own keywords highlight here
     (font-lock-add-keywords 'js2-mode
