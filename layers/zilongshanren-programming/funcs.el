@@ -89,7 +89,11 @@ comment box."
     (progn
       (with-eval-after-load 'flycheck
         (add-to-list 'flycheck-disabled-checkers 'javascript-eslint)
-        (flycheck-disable-checker 'javascript-eslint)))))
+        (flycheck-disable-checker 'javascript-eslint)
+        )
+      )
+    )
+  )
 
 
 ;; (defun my-js2-mode-hook ()

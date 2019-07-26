@@ -44,7 +44,9 @@
 (when (spacemacs/window-system-is-mac)
   (setq ns-pop-up-frames nil))
 
-(global-prettify-symbols-mode 1)
+;; 禁用代码转符号
+;; (global-prettify-symbols-mode nil)
+
 (setq-default fill-column 80)
 
 ;; prevent dired window press o to split into three column
