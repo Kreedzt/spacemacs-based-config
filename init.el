@@ -116,6 +116,7 @@ This function should only modify configuration layer settings."
 
    ;; A list of packages that will not be installed and loaded.
    dotspacemacs-excluded-packages '(
+                                    evil
                                     org-projectile org-brain magit-gh-pulls magit-gitflow  evil-mc realgud tern company-tern
                                     evil-args evil-ediff evil-exchange evil-unimpaired
                                     evil-indent-plus volatile-highlights smartparens
