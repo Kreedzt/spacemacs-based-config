@@ -17,8 +17,6 @@
   :evil-leader "oti")
 
 (add-hook 'term-mode-hook 'zilongshanren/ash-term-hooks)
-(delete-selection-mode t)
-(add-hook 'prog-mode-hook 'spacemacs/toggle-hungry-delete-on)
 
 "解决fontlock耗时问题"
 "@see: https://www.emacswiki.org/emacs/FontLockSpeed"

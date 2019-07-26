@@ -53,6 +53,9 @@
 (setq recenter-positions '(top middle bottom))
 ;; delete the selection with a key press
 (delete-selection-mode t)
+;; 全局贪婪删除
+(add-hook 'prog-mode-hook 'spacemacs/toggle-hungry-delete-on)
+
 
 ;;add auto format paste code
 (dolist (command '(yank yank-pop))
