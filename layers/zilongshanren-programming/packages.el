@@ -69,6 +69,8 @@
 
 
     (setq lsp-auto-configure t)
+    ;; 禁用lsp缩进冲突问题
+    (custom-set-variables '(lsp-enable-indentation nil))
     (setq lsp-prefer-flymake nil)
     ))
 
