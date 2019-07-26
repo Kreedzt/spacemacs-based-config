@@ -36,7 +36,7 @@ This function should only modify configuration layer settings."
    '(nginx
      (typescript :variables
                  typescript-fmt-on-save nil
-                 typescript-fmt-tool 'prettier-js
+                 typescript-fmt-tool 'prettier
                  typescript-backend 'lsp)
      sql
      (html :variables
@@ -116,7 +116,6 @@ This function should only modify configuration layer settings."
 
    ;; A list of packages that will not be installed and loaded.
    dotspacemacs-excluded-packages '(
-                                    evil
                                     org-projectile org-brain magit-gh-pulls magit-gitflow  evil-mc realgud tern company-tern
                                     evil-args evil-ediff evil-exchange evil-unimpaired
                                     evil-indent-plus volatile-highlights smartparens
@@ -537,14 +536,14 @@ before packages are loaded."
     ;; java/c/c++
     (setq c-basic-offset n)
     ;; web development
-    (setq coffee-tab-width n) ; coffeescript
-    (setq javascript-indent-level n) ; javascript-mode
-    (setq js-indent-level n) ; js-mode
+    (setq coffee-tab-width n)           ; coffeescript
+    (setq javascript-indent-level n)    ; javascript-mode
+    (setq js-indent-level n)            ; js-mode
     (setq js2-basic-offset n) ; js2-mode, in latest js2-mode, it's alias of js-indent-level
     (setq web-mode-markup-indent-offset n) ; web-mode, html tag in html file
-    (setq web-mode-css-indent-offset n) ; web-mode, css in html file
-    (setq web-mode-code-indent-offset n) ; web-mode, js code in html file
-    (setq css-indent-offset n) ; css-mode
+    (setq web-mode-css-indent-offset n)    ; web-mode, css in html file
+    (setq web-mode-code-indent-offset n)   ; web-mode, js code in html file
+    (setq css-indent-offset n)             ; css-mode
     (setq standard-indent n)
     )
   (my-setup-indent 2)
@@ -570,7 +569,7 @@ before packages are loaded."
 
   "spell-checking config"
   ;; (setq-default dotspacemacs-configuration-layers
-                ;; '((spell-checking :variables )))
+  ;; '((spell-checking :variables )))
 
   ;; "save trigger eslint"
   ;; (add-hook 'js2-mode-hook
