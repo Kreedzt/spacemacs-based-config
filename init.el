@@ -39,8 +39,13 @@ This function should only modify configuration layer settings."
      ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
      ;; `M-m f e R' (Emacs style) to install them.
      ;; ----------------------------------------------------------------
+     emoji
+     ranger
+     colors
+     dap
+     prodigy
      react
-     ivy
+     (ivy :variables ivy-enable-advanced-buffer-information nil)
      ;; helm
      auto-completion
      better-defaults
@@ -71,9 +76,15 @@ This function should only modify configuration layer settings."
      ;; (shell :variables
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
-     ;; spell-checking
-     syntax-checking
+     (spell-checking :variables spell-checking-enable-by-default nil)
+     (syntax-checking :variables
+                      syntax-checking-enable-by-default nil
+                      syntax-checking-enable-tooltips nil)
+     (spacemacs-layouts :variables layouts-enable-autosave nil
+                        layouts-autosave-delay 300)
      ;; version-control
+     ;; custom layer
+     zilongshanren
      )
 
    ;; List of additional packages that will be installed without being
@@ -90,7 +101,21 @@ This function should only modify configuration layer settings."
 
    ;; A list of packages that will not be installed and loaded.
    dotspacemacs-excluded-packages '(
-                                    tern company-tern
+                                    org-projectile org-brain magit-gh-pulls magit-gitflow  evil-mc realgud tern company-tern
+                                    evil-args evil-ediff evil-exchange evil-unimpaired
+                                    evil-indent-plus volatile-highlights smartparens
+                                    spaceline skewer-mode rainbow-delimiters
+                                    highlight-indentation vi-tilde-fringe eyebrowse ws-butler
+                                    org-bullets smooth-scrolling org-repo-todo org-download org-timer
+                                    livid-mode git-gutter git-gutter-fringe  evil-escape
+                                    leuven-theme gh-md evil-lisp-state spray lorem-ipsum symon
+                                    ac-ispell ace-jump-mode auto-complete auto-dictionary
+                                    clang-format define-word google-translate disaster epic
+                                    fancy-battery org-present orgit orglue spacemacs-theme
+                                    helm-flyspell flyspell-correct-helm clean-aindent-mode
+                                    helm-c-yasnippet ace-jump-helm-line helm-make magithub
+                                    helm-themes helm-swoop helm-spacemacs-help smeargle
+                                    ido-vertical-mode flx-ido company-quickhelp ivy-rich helm-purpose
                                     )
 
    ;; Defines the behaviour of Spacemacs when installing packages.
@@ -230,7 +255,7 @@ It should only modify the values of Spacemacs settings."
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
    dotspacemacs-default-font '("Source Code Pro"
-                               :size 14
+                               :size 28
                                :weight normal
                                :width normal)
 
@@ -489,15 +514,46 @@ configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
 
-  (require 'hungry-delete)
-  (global-hungry-delete-mode t)
-  (setq-default js2-basic-offset 2)
-  (setq-default js-indent-level 2)
+  (defun my-setup-indent (n)
+    (setq standard-indent n)
+    (setq tab-width n)
+    ;; java/c/c++
+    (setq c-basic-offset n)
+    ;; web development
+    (setq coffee-tab-width n)           ; coffeescript
+    (setq javascript-indent-level n)    ; javascript-mode
+    (setq js-indent-level n)            ; js-mode
+    (setq js2-basic-offset n) ; js2-mode, in latest js2-mode, it's alias of js-indent-level
+    (setq web-mode-markup-indent-offset n) ; web-mode, html tag in html file
+    (setq web-mode-css-indent-offset n)    ; web-mode, css in html file
+    (setq web-mode-code-indent-offset n)   ; web-mode, js code in html file
+    (setq css-indent-offset n)             ; css-mode
+    (setq standard-indent n)
+    )
+  (my-setup-indent 2)
+
+  "modify typescript indent level"
+  (setq-default typescript-indent-level 2)
+  "Eslint fix file"
+  (defun eslint-fix-file ()
+    (interactive)
+    (message "eslint --fixing the file" (buffer-file-name))
+    (shell-command (concat "eslint --fix " (buffer-file-name))))
+
+  (defun eslint-fix-file-and-revert ()
+    (interactive)
+    (eslint-fix-file)
+    (revert-buffer t t))
+
+  "高分辨率缩放"
+  (display-pixel-width)
+  (display-pixel-height)
 
   "设置windows中文字体"
+  ;; origin: 14/16
   (when (configuration-layer/layer-usedp 'chinese)
     (when (and (spacemacs/system-is-mac) window-system)
-      (spacemacs//set-monospaced-font "Source Code Pro" "Hiragino Sans GB" 14 16)))
+      (spacemacs//set-monospaced-font "Source Code Pro" "Hiragino Sans GB" 28 32)))
 
   (when (and (spacemacs/system-is-mswindows) window-system)
     (setq ispell-program-name "aspell")
@@ -506,7 +562,7 @@ before packages are loaded."
     (dolist (charset '(kana han symbol cjk-misc bopomofo))
       (set-fontset-font (frame-parameter nil 'font)
                         charset
-                        (font-spec :family "Microsoft Yahei" :size 14))))
+                        (font-spec :family "Microsoft Yahei" :size 28))))
 
   )
 
