@@ -94,6 +94,7 @@ This function should only modify configuration layer settings."
    ;; To use a local version of a package, use the `:location' property:
    ;; '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
+  
    dotspacemacs-additional-packages '()
 
    ;; A list of packages that cannot be updated.
@@ -562,7 +563,7 @@ before packages are loaded."
     (dolist (charset '(kana han symbol cjk-misc bopomofo))
       (set-fontset-font (frame-parameter nil 'font)
                         charset
-                        (font-spec :family "Microsoft Yahei" :size 28))))
+                        (font-spec :family "WenQuanYi Micro Hei Mono" :size 28))))
 
   )
 
