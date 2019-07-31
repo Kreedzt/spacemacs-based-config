@@ -47,11 +47,23 @@ This function should only modify configuration layer settings."
      react
      (ivy :variables ivy-enable-advanced-buffer-information nil)
      ;; helm
-     auto-completion
+     (auto-completion :variables auto-completion-enable-sort-by-usage t
+                      auto-completion-enable-snippets-in-popup t
+                      auto-completion-tab-key-behavior 'cycle
+                      :disabled-for org markdown)
      better-defaults
      emacs-lisp
-     git
+     (git :variables
+          git-magit-status-fullscreen t
+          magit-push-always-verify nil
+          magit-save-repository-buffers 'dontask
+          magit-revert-buffers 'silent
+          magit-refs-show-commit-count 'all
+          magit-revision-show-gravatars nil)
+     (ibuffer :variables ibuffer-group-buffers-by 'projects)
      markdown
+     latex
+     gpu
      (typescript :variables
                  typescript-backend 'lsp)
      (javascript :variables
@@ -491,14 +503,26 @@ This function is called immediately after `dotspacemacs/init', before layer
 configuration.
 It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
-(setq tramp-ssh-controlmaster-options
-      "-o ControlMaster=auto -o ControlPath='tramp.%%C' -o ControlPersist=no")
-(delete-selection-mode t)
-(add-hook 'prog-mode-hook 'spacemacs/toggle-hungry-delete-on)
-(setq configuration-layer-elpa-archives
-    '(("melpa-cn" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")
-      ("org-cn"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/org/")
-      ("gnu-cn"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")))
+  (setq tramp-ssh-controlmaster-options
+        "-o ControlMaster=auto -o ControlPath='tramp.%%C' -o ControlPersist=no")
+  (delete-selection-mode t)
+  (add-hook 'prog-mode-hook 'spacemacs/toggle-hungry-delete-on)
+  (setq configuration-layer-elpa-archives
+        '(("melpa-cn" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")
+          ("org-cn"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/org/")
+          ("gnu-cn"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")))
+  (setq term-char-mode-point-at-process-mark nil)
+
+  ;; https://github.com/syl20bnr/spacemacs/issues/2705
+  ;; (setq tramp-mode nil)
+  (setq tramp-ssh-controlmaster-options
+        "-o ControlMaster=auto -o ControlPath='tramp.%%C' -o ControlPersist=no")
+
+  ;; ss proxy. But it will cause anacond-mode failed.
+  ;; (setq socks-server '("Default server" "127.0.0.1" 1080 5))
+  (setq evil-shift-round nil)
+  (setq byte-compile-warnings '(not obsolete))
+  (setq warning-minimum-level :error)
   )
 
 (defun dotspacemacs/user-load ()
@@ -556,9 +580,6 @@ before packages are loaded."
     (when (and (spacemacs/system-is-mac) window-system)
       (spacemacs//set-monospaced-font "Source Code Pro" "Hiragino Sans GB" 28 32)))
 
-  ;; 解决win下lsp卡顿问题
-  (setq inhibit-compacting-font-caches t)
-
   (when (and (spacemacs/system-is-mswindows) window-system)
     (setq ispell-program-name "aspell")
     (setq w32-pass-alt-to-system nil)
@@ -567,6 +588,102 @@ before packages are loaded."
       (set-fontset-font (frame-parameter nil 'font)
                         charset
                         (font-spec :family "WenQuanYi Micro Hei Mono" :size 28))))
+
+  (fset 'evil-visual-update-x-selection 'ignore)
+
+  ;; force horizontal split window
+  (setq split-width-threshold 120)
+
+  (spacemacs|add-company-backends :modes text-mode)
+
+  (add-hook 'doc-view-mode-hook 'auto-revert-mode)
+
+  (global-hungry-delete-mode t)
+  (spacemacs|diminish helm-gtags-mode)
+  (spacemacs|diminish ggtags-mode)
+  (spacemacs|diminish which-key-mode)
+  (spacemacs|diminish spacemacs-whitespace-cleanup-mode)
+  (spacemacs|diminish counsel-mode)
+
+  (evilified-state-evilify-map special-mode-map :mode special-mode)
+
+  (add-to-list 'auto-mode-alist
+               '("Capstanfile\\'" . yaml-mode))
+
+  
+  (setq inhibit-compacting-font-caches t)
+  (global-display-line-numbers-mode -1)
+
+  (defun moon-override-yank-pop (&optional arg)
+    "Delete the region before inserting poped string."
+    (when (and evil-mode (eq 'visual evil-state))
+      (kill-region (region-beginning) (region-end))))
+
+  (advice-add 'counsel-yank-pop :before #'moon-override-yank-pop)
+  (setq ivy-more-chars-alist '((counsel-ag . 2)
+                               (counsel-grep .2)
+                               (t . 3)))
+
+  ;; boost find file and load saved persp layout  performance
+  ;; which will break some function on windows platform
+  ;; eg. known issues: magit related buffer color, reopen will fix it
+  (when (spacemacs/system-is-mswindows)
+    (progn (setq find-file-hook nil)
+           (setq vc-handled-backends nil)
+           (setq magit-refresh-status-buffer nil)
+           (add-hook 'find-file-hook 'spacemacs/check-large-file)
+
+           ;; emax.7z in not under pdumper release
+           ;; https://github.com/m-parashar/emax64/releases/tag/pdumper-20180619
+           (defvar emax-root (concat (expand-file-name "~") "/emax"))
+
+           (when (file-exists-p emax-root)
+             (progn
+               (defvar emax-root (concat (expand-file-name "~") "/emax"))
+               (defvar emax-bin64 (concat emax-root "/bin64"))
+               (defvar emax-mingw64 (concat emax-root "/mingw64/bin"))
+               (defvar emax-lisp (concat emax-root "/lisp"))
+
+               (setq exec-path (cons emax-bin64 exec-path))
+               (setenv "PATH" (concat emax-bin64 ";" (getenv "PATH")))
+
+               (setq exec-path (cons emax-mingw64 exec-path))
+               (setenv "PATH" (concat emax-mingw64 ";" (getenv "PATH")))
+               ))
+
+           (add-hook 'projectile-mode-hook '(lambda () (remove-hook 'find-file-hook #'projectile-find-file-hook-function)))))
+
+  (defun counsel-locate-cmd-es (input)
+    "Return a shell command based on INPUT."
+    (counsel-require-program "es.exe")
+    (encode-coding-string (format "es.exe -i -r -p %s"
+                                  (counsel-unquote-regex-parens
+                                   (ivy--regex input t)))
+                          'gbk))
+  ;; (add-hook 'text-mode-hook 'spacemacs/toggle-spelling-checking-on)
+
+  (add-hook 'org-mode-hook 'emojify-mode)
+  (add-hook 'org-mode-hook 'auto-fill-mode)
+
+  ;; https://emacs-china.org/t/ox-hugo-auto-fill-mode-markdown/9547/4
+  (defadvice org-hugo-paragraph (before org-hugo-paragraph-advice
+                                        (paragraph contents info) activate)
+    "Join consecutive Chinese lines into a single long line without
+unwanted space when exporting org-mode to hugo markdown."
+    (let* ((origin-contents (ad-get-arg 1))
+           (fix-regexp "[[:multibyte:]]")
+           (fixed-contents
+            (replace-regexp-in-string
+             (concat
+              "\\(" fix-regexp "\\) *\n *\\(" fix-regexp "\\)") "\\1\\2" origin-contents)))
+      (ad-set-arg 1 fixed-contents)))
+
+  ;; fix for the magit popup doesn't have a q keybindings
+  (with-eval-after-load 'transient
+    (transient-bind-q-to-quit))
+
+  ;; fix for the lsp error
+  (defvar spacemacs-jump-handlers-fundamental-mode nil)
 
   )
 
