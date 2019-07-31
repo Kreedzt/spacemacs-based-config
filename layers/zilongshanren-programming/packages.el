@@ -82,11 +82,11 @@
     :commands (compile-dwim-run compile-dwim-compile)
     :init))
 
-;; (defun zilongshanren-programming/init-exec-path-from-shell ()
-;;   (use-package exec-path-from-shell
-;;     :init
-;;     (when (memq window-system '(mac ns))
-;;       (exec-path-from-shell-initialize))))
+(defun zilongshanren-programming/init-exec-path-from-shell ()
+  (use-package exec-path-from-shell
+    :init
+    (when (memq window-system '(mac ns))
+      (exec-path-from-shell-initialize))))
 
 (defun zilongshanren-programming/init-caps-lock ()
   (use-package caps-lock

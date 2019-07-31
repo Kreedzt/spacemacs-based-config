@@ -44,7 +44,7 @@ This function should only modify configuration layer settings."
            css-enable-lsp t
            less-enable-lsp t
            scss-enable-lsp t
-      )
+           )
      react
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
@@ -70,7 +70,7 @@ This function should only modify configuration layer settings."
           lsp-ui-sideline-enable nil
           lsp-ui-peek-enable t
           lsp-ui-remap-xref-keybindings t
-      )
+          )
      better-defaults
      emacs-lisp
      (git :variables
@@ -84,7 +84,9 @@ This function should only modify configuration layer settings."
      ;; multiple-cursors
      neotree
      ;; treemacs
-     org
+     (org :variables org-want-todo-bindings t
+          org-enable-hugo-support t)
+     gpu
      ;; (shell :variables
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
@@ -562,20 +564,80 @@ before packages are loaded."
     (eslint-fix-file)
     (revert-buffer t t))
 
-  "为tsx-mode禁用flycheck"
-  ;; (add-hook 'typescript-tsx-mode
-  ;;           (flycheck-mode nil))
-
-
-
   "spell-checking config"
   ;; (setq-default dotspacemacs-configuration-layers
   ;; '((spell-checking :variables )))
 
-  ;; "save trigger eslint"
-  ;; (add-hook 'js2-mode-hook
-  ;;           (lambda ()
-  ;;             (add-hook 'after-save-hook #'eslint-fix-file-and-revert)))
+  (fset 'evil-visual-update-x-selection 'ignore)
+
+  ;; force horizontal split window
+  (setq split-width-threshold 120)
+  ;; (linum-relative-on)
+
+  (spacemacs|add-company-backends :modes text-mode)
+
+  (add-hook 'doc-view-mode-hook 'auto-revert-mode)
+
+  ;; temp fix for ivy-switch-buffer
+  ;; (spacemacs/set-leader-keys "bb" 'helm-mini)
+
+  (global-hungry-delete-mode t)
+  (spacemacs|diminish helm-gtags-mode)
+  (spacemacs|diminish ggtags-mode)
+  (spacemacs|diminish which-key-mode)
+  (spacemacs|diminish spacemacs-whitespace-cleanup-mode)
+  (spacemacs|diminish counsel-mode)
+
+  (evilified-state-evilify-map special-mode-map :mode special-mode)
+
+  (setq inhibit-compacting-font-caches t)
+  (global-display-line-numbers-mode -1)
+
+  (defun moon-override-yank-pop (&optional arg)
+    "Delete the region before inserting poped string."
+    (when (and evil-mode (eq 'visual evil-state))
+      (kill-region (region-beginning) (region-end))))
+
+  (advice-add 'counsel-yank-pop :before #'moon-override-yank-pop)
+  (setq ivy-more-chars-alist '((counsel-ag . 2)
+                               (counsel-grep .2)
+                               (t . 3)))
+
+  ;; 环境变量
+  (setq exec-path (cons "/Users/kreedzt/.nvm/versions/node/v10.14.2/bin/" exec-path))
+  (setenv "PATH" (concat "/Users/kreedzt/.nvm/versions/node/v10.14.2/bin/" (getenv "PATH")))
+
+  (defun counsel-locate-cmd-es (input)
+    "Return a shell command based on INPUT."
+    (counsel-require-program "es.exe")
+    (encode-coding-string (format "es.exe -i -r -p %s"
+                                  (counsel-unquote-regex-parens
+                                   (ivy--regex input t)))
+                          'gbk))
+  
+  (add-hook 'org-mode-hook 'emojify-mode)
+  (add-hook 'org-mode-hook 'auto-fill-mode)
+
+  ;; https://emacs-china.org/t/ox-hugo-auto-fill-mode-markdown/9547/4
+  (defadvice org-hugo-paragraph (before org-hugo-paragraph-advice
+                                        (paragraph contents info) activate)
+    "Join consecutive Chinese lines into a single long line without
+unwanted space when exporting org-mode to hugo markdown."
+    (let* ((origin-contents (ad-get-arg 1))
+           (fix-regexp "[[:multibyte:]]")
+           (fixed-contents
+            (replace-regexp-in-string
+             (concat
+              "\\(" fix-regexp "\\) *\n *\\(" fix-regexp "\\)") "\\1\\2" origin-contents)))
+      (ad-set-arg 1 fixed-contents)))
+
+  ;; fix for the magit popup doesn't have a q keybindings
+  (with-eval-after-load 'transient
+    (transient-bind-q-to-quit))
+
+  ;; fix for the lsp error
+  ;;(defvar spacemacs-jump-handlers-fundamental-mode nil))
+
   )
 
 ;; (setq custom-file (expand-file-name "custom.el" dotspacemacs-directory))
