@@ -66,9 +66,9 @@
       ;; Jump out of a TeX macro when pressing TAB twice.
       ;; (th/define-context-key TeX-mode-map (kbd "TAB")
       ;;                        (when (and (= 1 (length (this-command-keys-vector)))
-	  ;;                                   (equal last-command-event (elt (this-command-keys-vector) 0))
-	  ;;                                   (TeX-current-macro))
-	  ;;                          #'th/TeX-goto-macro-end)))
+	    ;;                                   (equal last-command-event (elt (this-command-keys-vector) 0))
+	    ;;                                   (TeX-current-macro))
+	    ;;                          #'th/TeX-goto-macro-end)))
       
       (spacemacs|disable-company org-mode)
       (spacemacs/set-leader-keys-for-major-mode 'org-mode
@@ -283,6 +283,7 @@
 
       (require 'ox-md nil t)
 
+      (setq-default org-agenda-dir "~/org-notes")
       ;; define the refile targets
       (setq org-agenda-file-note (expand-file-name "notes.org" org-agenda-dir))
       (setq org-agenda-file-gtd (expand-file-name "gtd.org" org-agenda-dir))
