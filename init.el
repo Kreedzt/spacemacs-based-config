@@ -82,8 +82,8 @@ This function should only modify configuration layer settings."
           magit-revision-show-gravatars nil)
      markdown
      ;; multiple-cursors
-     neotree
-     ;; treemacs
+     ;; neotree
+     treemacs
      (org :variables org-want-todo-bindings t
           org-enable-hugo-support t)
      gpu
