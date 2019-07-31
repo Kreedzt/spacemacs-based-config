@@ -603,10 +603,6 @@ before packages are loaded."
                                (counsel-grep .2)
                                (t . 3)))
 
-  ;; 环境变量
-  (setq exec-path (cons "/Users/kreedzt/.nvm/versions/node/v10.14.2/bin/" exec-path))
-  (setenv "PATH" (concat "/Users/kreedzt/.nvm/versions/node/v10.14.2/bin/" (getenv "PATH")))
-
   (defun counsel-locate-cmd-es (input)
     "Return a shell command based on INPUT."
     (counsel-require-program "es.exe")
@@ -636,7 +632,7 @@ unwanted space when exporting org-mode to hugo markdown."
     (transient-bind-q-to-quit))
 
   ;; fix for the lsp error
-  ;;(defvar spacemacs-jump-handlers-fundamental-mode nil))
+  (defvar spacemacs-jump-handlers-fundamental-mode nil)
 
   )
 
