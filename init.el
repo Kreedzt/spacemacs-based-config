@@ -63,8 +63,8 @@ This function should only modify configuration layer settings."
      sql
      html
      ;; multiple-cursors
-     ;; treemacs
-     neotree
+     treemacs
+     ;; neotree
      org
      (latex :variables
             latex-build-command "LaTeX")
@@ -555,6 +555,9 @@ before packages are loaded."
   (when (configuration-layer/layer-usedp 'chinese)
     (when (and (spacemacs/system-is-mac) window-system)
       (spacemacs//set-monospaced-font "Source Code Pro" "Hiragino Sans GB" 28 32)))
+
+  ;; 解决win下lsp卡顿问题
+  (setq inhibit-compacting-font-caches t)
 
   (when (and (spacemacs/system-is-mswindows) window-system)
     (setq ispell-program-name "aspell")
