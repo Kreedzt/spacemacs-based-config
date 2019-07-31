@@ -72,6 +72,9 @@
     ;; 禁用lsp缩进冲突问题
     (custom-set-variables '(lsp-enable-indentation nil))
     (setq lsp-prefer-flymake nil)
+    ;; 提升lsp性能
+    (setq company-lsp-cache-candidates t)
+    (setq lsp-use-native-json t)
     ))
 
 (defun zilongshanren-programming/init-compile-dwim ()
