@@ -87,6 +87,7 @@ This function should only modify configuration layer settings."
      (org :variables org-want-todo-bindings t
           org-enable-hugo-support t)
      gpu
+     gtags
      ;; (shell :variables
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
@@ -550,6 +551,13 @@ before packages are loaded."
     (setq standard-indent n)
     )
   (my-setup-indent 2)
+
+  ;; 默认禁用gtags
+  (setq-default dotspacemacs-configuration-layers
+                '((gtags :variables gtags-enable-by-default t)))
+
+  ;; 启动emacs27内置json
+  (require 'json)
 
   "modify typescript indent level"
   (setq-default typescript-indent-level 2)
