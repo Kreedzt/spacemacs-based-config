@@ -33,7 +33,7 @@ This function should only modify configuration layer settings."
 
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(html
+   '(rust
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
@@ -65,15 +65,23 @@ This function should only modify configuration layer settings."
      latex
      gpu
      (typescript :variables
-                 typescript-backend 'lsp)
-     (javascript :variables
-                 javascript-backend 'lsp)
+                 ;; typescript-backend 'lsp
+                 typescript-fmt-on-save nil
+                 typescript-fmt-tool 'prettier
+                 )
+     ;; (javascript :variables
+     ;;             javascript-backend 'lsp)
+     javascript
      (lsp :variables
           lsp-ui-sideline-enable nil
           lsp-ui-peek-enable t
           lsp-ui-remap-xref-keybindings t)
      sql
-     html
+     (html :variables
+           css-enable-lsp t
+           less-enable-lsp t
+           scss-enable-lsp t
+           )
      ;; multiple-cursors
      treemacs
      ;; neotree
