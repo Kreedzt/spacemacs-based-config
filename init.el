@@ -53,6 +53,7 @@ This function should only modify configuration layer settings."
                       :disabled-for org markdown)
      better-defaults
      emacs-lisp
+     gtags
      (git :variables
           git-magit-status-fullscreen t
           magit-push-always-verify nil
@@ -105,6 +106,8 @@ This function should only modify configuration layer settings."
      ;; version-control
      ;; custom layer
      zilongshanren
+     (chinese :variables
+              chinese-enable-youdao-dict t)
      )
 
    ;; List of additional packages that will be installed without being
