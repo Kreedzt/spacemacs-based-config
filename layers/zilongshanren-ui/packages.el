@@ -15,13 +15,6 @@
     diminish
     popwin
     (whitespace :location built-in)
-    ;; hl-anything performance is very slow...
-    ;; hl-anything
-    ;; if you wnat to use spaceline, please comment out zilong-mode-line
-    ;; spaceline
-    ;; beacon
-    ;; evil-vimish-fold
-    ;; company-box
     )
   )
 

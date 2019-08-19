@@ -38,7 +38,8 @@ This function should only modify configuration layer settings."
      (typescript :variables
                  typescript-fmt-on-save nil
                  typescript-fmt-tool 'prettier
-                 typescript-backend 'lsp)
+                 typescript-backend 'lsp
+                 )
      sql
      (html :variables
            css-enable-lsp t
@@ -553,8 +554,8 @@ before packages are loaded."
   (my-setup-indent 2)
 
   ;; 默认禁用gtags
-  (setq-default dotspacemacs-configuration-layers
-                '((gtags :variables gtags-enable-by-default t)))
+  ;; (setq-default dotspacemacs-configuration-layers
+  ;;               '((gtags :variables gtags-enable-by-default t)))
 
   ;; 启动emacs27内置json
   (require 'json)
@@ -621,7 +622,7 @@ before packages are loaded."
   
   (add-hook 'org-mode-hook 'emojify-mode)
   (add-hook 'org-mode-hook 'auto-fill-mode)
-
+  
   ;; https://emacs-china.org/t/ox-hugo-auto-fill-mode-markdown/9547/4
   (defadvice org-hugo-paragraph (before org-hugo-paragraph-advice
                                         (paragraph contents info) activate)
