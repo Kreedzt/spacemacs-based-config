@@ -38,7 +38,7 @@ This function should only modify configuration layer settings."
      (typescript :variables
                  typescript-fmt-on-save nil
                  typescript-fmt-tool 'prettier
-                 ;; typescript-backend 'lsp
+                 typescript-backend nil
                  )
      sql
      (html :variables
