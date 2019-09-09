@@ -38,7 +38,7 @@ This function should only modify configuration layer settings."
      (typescript :variables
                  typescript-fmt-on-save nil
                  typescript-fmt-tool 'prettier
-                 typescript-backend 'lsp
+                 ;; typescript-backend 'lsp
                  )
      sql
      (html :variables
@@ -63,9 +63,10 @@ This function should only modify configuration layer settings."
                wakatime-api-key "61055c82-e3d6-46c9-8757-7f9e60019d6b"
                wakatime-cli-path "/Users/kreedzt/anaconda3/bin/wakatime")
      ;; js
-     (javascript
-      :variables javascript-backend 'lsp
-      )
+     javascript
+     ;; (javascript
+     ;;  :variables javascript-backend 'lsp
+     ;;  )
      auto-completion
      (lsp :variables
           lsp-ui-sideline-enable nil
@@ -88,16 +89,16 @@ This function should only modify configuration layer settings."
      (org :variables org-want-todo-bindings t
           org-enable-hugo-support t)
      gpu
-     gtags
+     (gtags :variables
+            gtags-enable-by-default nil)
      ;; (shell :variables
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
-     ;; (spell-checking :variables
-     ;;                 ispell-program-name "aspell"
-     ;;                 ispell-dictionary "american"
-     ;;                 spell-checking-enable-by-default nil
-     ;;                 )
-     (spell-checking :variables spell-checking-enable-by-default nil)
+     (spell-checking :variables
+                     ispell-program-name "aspell"
+                     ispell-dictionary "american"
+                     spell-checking-enable-by-default nil
+                     )
      (syntax-checking :variables
                       syntax-checking-enable-by-default nil
                       syntax-checking-enable-tooltips nil)
@@ -553,10 +554,6 @@ before packages are loaded."
     )
   (my-setup-indent 2)
 
-  ;; 默认禁用gtags
-  ;; (setq-default dotspacemacs-configuration-layers
-  ;;               '((gtags :variables gtags-enable-by-default t)))
-
   ;; 启动emacs27内置json
   (require 'json)
 
@@ -598,6 +595,9 @@ before packages are loaded."
   (spacemacs|diminish counsel-mode)
 
   (evilified-state-evilify-map special-mode-map :mode special-mode)
+
+  ;; 设置gtags
+  (spacemacs/helm-gtags-define-keys-for-mode 'typescript-tsx-mode)
 
   (setq inhibit-compacting-font-caches t)
   (global-display-line-numbers-mode -1)

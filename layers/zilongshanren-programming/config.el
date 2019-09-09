@@ -18,6 +18,9 @@
 
 (add-hook 'term-mode-hook 'zilongshanren/ash-term-hooks)
 
+;; (require 'company-box)
+;; (add-hook 'company-mode-hook 'company-box-mode)
+
 "解决fontlock耗时问题"
 "@see: https://www.emacswiki.org/emacs/FontLockSpeed"
 ;; (setq font-lock-support-mode 'jit-lock-mode)
@@ -41,7 +44,6 @@
         (e (if mark-active (max (point) (mark)) (point-max))))
     (shell-command-on-region b e
                              "python -mjson.tool" (current-buffer) t)))
-
 
 
 

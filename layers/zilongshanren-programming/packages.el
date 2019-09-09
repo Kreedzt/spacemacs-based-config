@@ -27,10 +27,8 @@
         js2-refactor
         json-mode
         ;; racket-mode
-        ;; yasnippet
         web-mode
         js-doc
-        ;; lua-mode
         ;; (cc-mode :location built-in)
         ;; flycheck-clojure
         ;; etags-select
@@ -38,6 +36,7 @@
         ;; (emacs-lisp :location built-in)
         ;; clojure-mode
         company
+        ;; company-box
         (eldoc :location built-in)
         graphviz-dot-mode
         ;; cider
@@ -180,26 +179,6 @@
                                      company-etags)
                                     company-files company-dabbrev)))
 
-
-
-;; (defun zilongshanren-programming/post-init-yasnippet ()
-;;   (progn
-;;     (set-face-background 'secondary-selection "gray")
-    
-;;     (with-eval-after-load 'yasnippet
-;;       (progn
-;;         (define-key yas-keymap [(tab)]       (yas-filtered-definition 'yas-next-field))
-;;         (define-key yas-keymap (kbd "TAB")   (yas-filtered-definition 'yas-next-field))))
-
-;;     (setq-default yas-prompt-functions '(yas-ido-prompt yas-dropdown-prompt))
-;;     (mapc #'(lambda (hook) (remove-hook hook 'spacemacs/load-yasnippet)) '(prog-mode-hook
-;;                                                                       org-mode-hook
-;;                                                                       markdown-mode-hook))
-
-;;     (spacemacs/add-to-hooks 'zilongshanren/load-yasnippet '(prog-mode-hook
-;;                                                             markdown-mode-hook
-;;                                                             org-mode-hook))
-;;     ))
 
 (defun zilongshanren-programming/post-init-json-mode ()
   (add-to-list 'auto-mode-alist '("\\.tern-project\\'" . json-mode))
