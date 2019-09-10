@@ -105,7 +105,7 @@
         "C" 'dired-do-copy
         "<mouse-2>" 'my-dired-find-file
         "`" 'dired-open-term
-        "C-p" 'peep-dired-prev-file
+        (kbd "C-p") 'peep-dired-prev-file
         "p" 'peep-dired-prev-file
         "n" 'peep-dired-next-file
         "gr" 'revert-buffer

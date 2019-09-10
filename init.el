@@ -542,7 +542,7 @@ before packages are loaded."
     (setq standard-indent n)
     (setq tab-width n)
     ;; java/c/c++
-    (setq c-basic-offset n)
+    (setq c-basic-offset 4)
     ;; web development
     (setq coffee-tab-width n)           ; coffeescript
     (setq javascript-indent-level n)    ; javascript-mode
