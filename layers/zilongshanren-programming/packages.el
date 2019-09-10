@@ -146,12 +146,12 @@
   )
 
 
-(defun zilongshanren-programming/init-ctags-update ()
-  (use-package ctags-update
-    :init
-    :defer t
-    :config
-    (spacemacs|hide-lighter ctags-auto-update-mode)))
+;; (defun zilongshanren-programming/init-ctags-update ()
+;;   (use-package ctags-update
+;;     :init
+;;     :defer t
+;;     :config
+;;     (spacemacs|hide-lighter ctags-auto-update-mode)))
 
 ;; nodejs-repl is much better now.
 ;; (defun zilongshanren-programming/init-js-comint ()
@@ -176,7 +176,8 @@
     (web-mode-dom-errors-show))
   (setq company-backends-web-mode '((company-dabbrev-code
                                      company-keywords
-                                     company-etags)
+                                     ;;company-gtags
+                                     )
                                     company-files company-dabbrev)))
 
 
@@ -243,12 +244,14 @@
     ;; (add-hook 'web-mode-hook 'my-setup-develop-environment)
 
     (spacemacs|define-jump-handlers js2-mode)
-    (add-hook 'spacemacs-jump-handlers-js2-mode 'etags-select-find-tag-at-point)
+    ;; (add-hook 'spacemacs-jump-handlers-js2-mode 'etags-select-find-tag-at-point)
 
-    (setq company-backends-js2-mode '((company-dabbrev-code :with company-keywords company-etags)
+    (setq company-backends-js2-mode '((company-dabbrev-code :with company-keywords ;;company-gtags
+                                                            )
                                       company-files company-dabbrev))
 
-    (setq company-backends-js-mode '((company-dabbrev-code :with company-keywords company-etags)
+    (setq company-backends-js-mode '((company-dabbrev-code :with company-keywords ;;company-gtags
+                                                           )
                                      company-files company-dabbrev))
 
     ;; (add-hook 'js2-mode-hook 'my-js2-mode-hook)

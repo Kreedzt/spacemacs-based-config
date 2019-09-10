@@ -16,6 +16,9 @@
   :documentation "Enable iimage mode"
   :evil-leader "oti")
 
+"设置gtags"
+;; (setq company-backends '((company-dabbrev-code company-gtags)))
+
 (add-hook 'term-mode-hook 'zilongshanren/ash-term-hooks)
 
 ;; (require 'company-box)

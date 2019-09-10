@@ -63,7 +63,9 @@ This function should only modify configuration layer settings."
                wakatime-api-key "61055c82-e3d6-46c9-8757-7f9e60019d6b"
                wakatime-cli-path "/Users/kreedzt/anaconda3/bin/wakatime")
      ;; js
-     javascript
+     (javascript :variables
+                 javascript-backend 'nil
+      )
      ;; (javascript
      ;;  :variables javascript-backend 'lsp
      ;;  )
@@ -122,7 +124,7 @@ This function should only modify configuration layer settings."
 
    ;; A list of packages that will not be installed and loaded.
    dotspacemacs-excluded-packages '(
-                                    org-projectile org-brain magit-gh-pulls magit-gitflow  evil-mc realgud tern company-tern
+                                    org-projectile org-brain magit-gh-pulls magit-gitflow  evil-mc realgud tern company-tern tern-mode
                                     evil-args evil-ediff evil-exchange evil-unimpaired
                                     evil-indent-plus volatile-highlights smartparens
                                     spaceline skewer-mode rainbow-delimiters
