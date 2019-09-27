@@ -30,6 +30,7 @@
      'font-lock-type-face))
   "")
 
+
 (defun zilong/modeline--evil-substitute ()
   "Show number of matches for evil-ex substitutions and highlights in real time."
   (when (and (bound-and-true-p evil-local-mode)

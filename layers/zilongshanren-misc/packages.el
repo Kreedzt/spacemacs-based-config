@@ -17,7 +17,7 @@
         projectile
         prodigy
         find-file-in-project
-        multiple-cursors
+        ;;multiple-cursors
         visual-regexp
         visual-regexp-steroids
         command-log
@@ -851,79 +851,6 @@ Search for a search tool in the order provided by `dotspacemacs-search-tools'."
     (progn
       (define-key global-map (kbd "C-c r") 'vr/replace)
       (define-key global-map (kbd "C-c q") 'vr/query-replace))))
-
-(defun zilongshanren-misc/init-multiple-cursors ()
-  (use-package multiple-cursors
-    :init
-    (progn
-
-      (bind-key* "C-s-l" 'mc/edit-lines)
-      (bind-key* "C-s-f" 'mc/mark-all-dwim)
-      (bind-key* "s-." 'mc/mark-next-like-this)
-      (bind-key* "C-s-," 'mc/mark-previous-like-this)
-      (bind-key* "s->" 'mc/unmark-next-like-this)
-      (bind-key* "s-<" 'mc/unmark-previous-like-this)
-      (bind-key* "C-c C-s-." 'mc/mark-all-like-this)
-
-      ;; http://endlessparentheses.com/multiple-cursors-keybinds.html?source=rss
-      (define-prefix-command 'endless/mc-map)
-      ;; C-x m is usually `compose-mail'. Bind it to something
-      ;; else if you use this command.
-      (define-key ctl-x-map "m" 'endless/mc-map)
-;;; Really really nice!
-      (define-key endless/mc-map "i" #'mc/insert-numbers)
-      (define-key endless/mc-map "h" #'mc-hide-unmatched-lines-mode)
-      (define-key endless/mc-map "a" #'mc/mark-all-like-this)
-
-;;; Occasionally useful
-      (define-key endless/mc-map "d" #'mc/mark-all-symbols-like-this-in-defun)
-      (define-key endless/mc-map "r" #'mc/reverse-regions)
-      (define-key endless/mc-map "s" #'mc/sort-regions)
-      (define-key endless/mc-map "l" #'mc/edit-lines)
-      (define-key endless/mc-map "\C-a" #'mc/edit-beginnings-of-lines)
-      (define-key endless/mc-map "\C-e" #'mc/edit-ends-of-lines)
-      )
-    :config
-    (setq mc/cmds-to-run-once
-          '(
-            counsel-M-x
-            zilongshanren/my-mc-mark-next-like-this))
-    (setq mc/cmds-to-run-for-all
-          '(
-            electric-newline-and-maybe-indent
-            hungry-delete-backward
-            spacemacs/backward-kill-word-or-region
-            spacemacs/smart-move-beginning-of-line
-            evil-substitute
-            lispy-move-beginning-of-line
-            lispy-move-end-of-line
-            lispy-space
-            lispy-delete-backward
-            evil-exit-visual-state
-            evil-backward-char
-            evil-delete-char
-            evil-escape-emacs-state
-            evil-escape-insert-state
-            mwim-beginning-of-code-or-line
-            mwim-end-of-line-or-code
-            evil-exit-emacs-state
-            evil-previous-visual-line
-            evil-next-visual-line
-            evil-forward-char
-            evil-insert
-            evil-next-line
-            evil-normal-state
-            evil-previous-line
-            evil-append
-            evil-append-line
-            forward-sentence
-            kill-sentence
-            org-self-insert-command
-            sp-backward-delete-char
-            sp-delete-char
-            sp-remove-active-pair-overlay
-            orgtbl-hijacker-command-109))
-    ))
 
 (defun zilongshanren-misc/post-init-persp-mode ()
   (setq persp-kill-foreign-buffer-behaviour 'kill)

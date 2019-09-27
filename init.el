@@ -117,7 +117,9 @@ This function should only modify configuration layer settings."
    ;; To use a local version of a package, use the `:location' property:
    ;; '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages '(youdao-dictionary)
+   dotspacemacs-additional-packages '(doom-themes
+                                      all-the-icons
+                                      )
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -258,7 +260,9 @@ It should only modify the values of Spacemacs settings."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(solarized-light
+   dotspacemacs-themes '(
+                         doom-solarized-light
+                         solarized-light
                          spacemacs-dark
                          spacemacs-light)
 
@@ -269,8 +273,7 @@ It should only modify the values of Spacemacs settings."
    ;; refer to the DOCUMENTATION.org for more info on how to create your own
    ;; spaceline theme. Value can be a symbol or list with additional properties.
    ;; (default '(spacemacs :separator wave :separator-scale 1.5))
-   dotspacemacs-mode-line-theme '(spacemacs
-                                  :separator-scale 1.5
+   dotspacemacs-mode-line-theme '(doom
                                   )
 
    ;; If non-nil the cursor color matches the state color in GUI Emacs.
@@ -555,9 +558,6 @@ before packages are loaded."
     (setq standard-indent n)
     )
   (my-setup-indent 2)
-
-  ;; 启动emacs27内置json
-  (require 'json)
 
   "modify typescript indent level"
   (setq-default typescript-indent-level 2)
