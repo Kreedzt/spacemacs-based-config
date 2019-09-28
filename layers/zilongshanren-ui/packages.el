@@ -11,7 +11,7 @@
 
 (defconst zilongshanren-ui-packages
   '(
-    (zilong-mode-line :location built-in)
+    ;; (zilong-mode-line :location built-in)
     diminish
     popwin
     (whitespace :location built-in)

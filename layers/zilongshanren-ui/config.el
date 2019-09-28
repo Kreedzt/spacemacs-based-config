@@ -46,3 +46,7 @@
    #b00000000
    #b00000000])
 
+;; doom
+(setq doom-themes-treemacs-theme "doom-colors")
+(doom-themes-treemacs-config)
+(doom-themes-org-config)
