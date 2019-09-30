@@ -43,7 +43,6 @@
         ;; cider
         ;; editorconfig
         ;; robe
-        ;; exec-path-from-shell
         lsp-mode
         typescript-mode
         ))
@@ -78,12 +77,6 @@
   (use-package compile-dwim
     :commands (compile-dwim-run compile-dwim-compile)
     :init))
-
-;; (defun zilongshanren-programming/init-exec-path-from-shell ()
-;;   (use-package exec-path-from-shell
-;;     :init
-;;     (when (memq window-system '(mac ns))
-;;       (exec-path-from-shell-initialize))))
 
 (defun zilongshanren-programming/init-caps-lock ()
   (use-package caps-lock
@@ -142,14 +135,6 @@
         js-doc-license "MIT")
 
   )
-
-
-(defun zilongshanren-programming/init-ctags-update ()
-  (use-package ctags-update
-    :init
-    :defer t
-    :config
-    (spacemacs|hide-lighter ctags-auto-update-mode)))
 
 ;; nodejs-repl is much better now.
 ;; (defun zilongshanren-programming/init-js-comint ()
@@ -402,9 +387,22 @@
 
 (defun zilongshanren-programming/post-init-company ()
   (progn
+    (setq company-dabbrev-code-other-buffers 'all)
+    ;; enable dabbrev-expand in company completion https://emacs-china.org/t/topic/6381
+    (setq company-dabbrev-char-regexp "[\\.0-9a-z-_'/]")
+
     (setq company-minimum-prefix-length 1
           company-idle-delay 0.08)
 
     (when (configuration-layer/package-usedp 'company)
       (spacemacs|add-company-backends :modes shell-script-mode makefile-bsdmake-mode sh-mode lua-mode nxml-mode conf-unix-mode json-mode graphviz-dot-mode js2-mode js-mode))
     ))
+
+;; (defun zilongshanren-programming/post-init-company-c-headers ()
+;;   (progn
+;;     (setq company-c-headers-path-system
+;;           (quote
+;;            ("/usr/include/" "/usr/local/include/" "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1")))
+;;     (setq company-c-headers-path-user
+;;           (quote
+;;            ("/Users/guanghui/cocos2d-x/cocos/platform" "/Users/guanghui/cocos2d-x/cocos" "." "/Users/guanghui/cocos2d-x/cocos/audio/include/")))))

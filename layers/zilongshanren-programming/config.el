@@ -1,3 +1,4 @@
+
 ;;; config.el --- zilongshanren Layer packages File for Spacemacs
 ;;
 ;; Copyright (c) 2015-2016 zilongshanren
@@ -18,13 +19,9 @@
 
 (add-hook 'term-mode-hook 'zilongshanren/ash-term-hooks)
 
-"解决fontlock耗时问题"
-"@see: https://www.emacswiki.org/emacs/FontLockSpeed"
-;; (setq font-lock-support-mode 'jit-lock-mode)
-;; (setq jit-lock-stealth-time 16
-;;       jit-lock-defer-contextually t
-;;       jit-lock-stealth-nice 0.5)
-;; (setq-default font-lock-multiline t)
+"增加GTAGS环境变量"
+(setenv "PATH" (concat "C:\\Users\\zhaoz\\gtags\\bin;" (getenv "PATH")))
+(setq exec-path (append exec-path '("C:\\Users\\zhaoz\\gtags\\bin")))
 
 "解决LSP报错问题"
 "@see: https://emacs-china.org/t/tide-javascript/7068/24"
