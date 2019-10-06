@@ -159,7 +159,7 @@
     (web-mode-dom-errors-show))
   (setq company-backends-web-mode '((company-dabbrev-code
                                      company-keywords
-                                     company-etags)
+                                     company-gtags)
                                     company-files company-dabbrev)))
 
 
@@ -283,10 +283,10 @@
     (spacemacs|define-jump-handlers js2-mode)
     (add-hook 'spacemacs-jump-handlers-js2-mode 'etags-select-find-tag-at-point)
 
-    (setq company-backends-js2-mode '((company-dabbrev-code :with company-keywords company-etags)
+    (setq company-backends-js2-mode '((company-dabbrev-code :with company-keywords company-gtags)
                                       company-files company-dabbrev))
 
-    (setq company-backends-js-mode '((company-dabbrev-code :with company-keywords company-etags)
+    (setq company-backends-js-mode '((company-dabbrev-code :with company-keywords company-gtags)
                                      company-files company-dabbrev))
 
     ;; (add-hook 'js2-mode-hook 'my-js2-mode-hook)
@@ -398,11 +398,12 @@
       (spacemacs|add-company-backends :modes shell-script-mode makefile-bsdmake-mode sh-mode lua-mode nxml-mode conf-unix-mode json-mode graphviz-dot-mode js2-mode js-mode))
     ))
 
-;; (defun zilongshanren-programming/post-init-company-c-headers ()
-;;   (progn
-;;     (setq company-c-headers-path-system
-;;           (quote
-;;            ("/usr/include/" "/usr/local/include/" "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1")))
-;;     (setq company-c-headers-path-user
-;;           (quote
-;;            ("/Users/guanghui/cocos2d-x/cocos/platform" "/Users/guanghui/cocos2d-x/cocos" "." "/Users/guanghui/cocos2d-x/cocos/audio/include/")))))
+(defun zilongshanren-programming/post-init-company-c-headers ()
+  (progn
+    (setq company-c-headers-path-system
+          (quote
+           ("C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\ucrt")))
+    ;; (setq company-c-headers-path-user
+    ;;       (quote
+    ;;        ("/Users/guanghui/cocos2d-x/cocos/platform" "/Users/guanghui/cocos2d-x/cocos" "." "/Users/guanghui/cocos2d-x/cocos/audio/include/")))
+    ))

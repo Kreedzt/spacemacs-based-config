@@ -69,7 +69,7 @@ This function should only modify configuration layer settings."
      latex
      gpu
      (typescript :variables
-                 ;; typescript-backend 'lsp
+                 typescript-backend nil
                  typescript-fmt-on-save nil
                  typescript-fmt-tool 'prettier
                  )
@@ -560,7 +560,7 @@ before packages are loaded."
     (setq standard-indent n)
     (setq tab-width n)
     ;; java/c/c++
-    (setq c-basic-offset n)
+    (setq c-basic-offset 4)
     ;; web development
     (setq coffee-tab-width n)           ; coffeescript
     (setq javascript-indent-level n)    ; javascript-mode

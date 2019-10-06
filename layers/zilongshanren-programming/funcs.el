@@ -175,17 +175,29 @@ comment box."
 
 (defvar my-tags-updated-time nil)
 
+;; 自定义gtags
+(defun my-create-gtags ()
+  (interactive)
+  (let ((dir (file-name-as-directory buffer-file-name))))
+    (setq file (concat dir "GTAGS"))
+    (when (spacemacs/system-is-mswindows)
+      (setq dir (substring dir 0 -1)))
+    (when (or (not (file-exists-p file)))
+      (message "Creating GTAGS in %s ..." dir)
+      (shell-command
+       (format "gtags %s -v --explain --gtagslabel=pygments" dir))))
+
 (defun my-create-tags-if-needed (SRC-DIR &optional FORCE)
   "return the full path of tags file"
   (let ((dir (file-name-as-directory (file-truename SRC-DIR)))
         file)
-    (setq file (concat dir "TAGS"))
+    (setq file (concat dir "GTAGS"))
     (when (spacemacs/system-is-mswindows)
       (setq dir (substring dir 0 -1)))
     (when (or FORCE (not (file-exists-p file)))
-      (message "Creating TAGS in %s ..." dir)
+      (message "Creating GTAGS in %s ..." dir)
       (shell-command
-       (format "ctags -f %s -e -R %s" file dir)))
+       (format "gtags %s -v --explain --gtagslabel=pygments" dir)))
     file))
 
 (defun my-update-tags ()

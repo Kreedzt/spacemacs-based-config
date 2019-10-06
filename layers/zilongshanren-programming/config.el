@@ -55,6 +55,7 @@
 
 (add-to-list 'auto-mode-alist '("\\.mm\\'" . objc-mode))
 (add-to-list 'auto-mode-alist '("\\.c\\'" . c++-mode))
+(add-hook 'c++-mode-hook (lambda () (company-mode 1)))
 
 
 
