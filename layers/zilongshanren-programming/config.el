@@ -21,6 +21,11 @@
 
 (add-hook 'term-mode-hook 'zilongshanren/ash-term-hooks)
 
+;; (add-hook 'c-mode-hook 'company-mode-hook)
+;; (add-hook 'cc-mode 'company-mode-hook)
+;; (add-hook 'c++-mode 'company-mode-hook)
+;; (global-company-mode)
+
 ;; (require 'company-box)
 ;; (add-hook 'company-mode-hook 'company-box-mode)
 
@@ -63,6 +68,7 @@
 
 (add-to-list 'auto-mode-alist '("\\.mm\\'" . objc-mode))
 (add-to-list 'auto-mode-alist '("\\.c\\'" . c++-mode))
+(add-hook 'c++-mode-hook (lambda () (company-mode 1)))
 
 
 

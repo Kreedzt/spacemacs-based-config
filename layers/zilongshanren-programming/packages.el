@@ -48,7 +48,9 @@
         ))
 
 (defun zilongshanren-programming/post-init-typescript-mode ()
-  (add-hook 'typescript-mode-hook 'my-ts-mode-hook))
+  (add-hook 'typescript-mode-hook 'my-ts-mode-hook)
+  (company-mode '((company-dabbrev-mode :width company-keywords company-gtags) company-files company-dabbrev))
+  )
 
 (defun zilongshanren-programming/post-init-lsp-mode ()
   (progn
@@ -73,7 +75,7 @@
     (setq lsp-prefer-flymake nil)
     ;; 提升lsp性能
     (setq company-lsp-cache-candidates t)
-    (setq lsp-use-native-json t)
+    ;; (setq lsp-use-native-json t)
     ))
 
 (defun zilongshanren-programming/init-compile-dwim ()
@@ -176,7 +178,7 @@
     (web-mode-dom-errors-show))
   (setq company-backends-web-mode '((company-dabbrev-code
                                      company-keywords
-                                     ;;company-gtags
+                                     company-gtags
                                      )
                                     company-files company-dabbrev)))
 
@@ -342,3 +344,9 @@
     (when (configuration-layer/package-usedp 'company)
       (spacemacs|add-company-backends :modes shell-script-mode makefile-bsdmake-mode sh-mode lua-mode nxml-mode conf-unix-mode json-mode graphviz-dot-mode js2-mode js-mode))
     ))
+
+(defun zilongshanren-programming/post-init-company-c-headers ()
+  (progn
+    (setq company-c-headers-path-system
+          (quote
+           ("/Users/kreedzt/anaconda3/include/c++/v1")))))

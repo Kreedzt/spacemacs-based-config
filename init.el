@@ -108,6 +108,9 @@ This function should only modify configuration layer settings."
                       syntax-checking-enable-tooltips nil)
      (spacemacs-layouts :variables layouts-enable-autosave nil
                         layouts-autosave-delay 300)
+     ;; chinese
+     (chinese :variables
+              chinese-enable-youdao-dict t)
      ;; custom layer
      zilongshanren
      )
@@ -121,6 +124,7 @@ This function should only modify configuration layer settings."
    ;; Also include the dependencies as they will not be resolved automatically.
    dotspacemacs-additional-packages '(doom-themes
                                       all-the-icons
+                                      youdao-dictionary
                                       )
 
    ;; A list of packages that cannot be updated.
@@ -585,7 +589,7 @@ before packages are loaded."
   ;; (linum-relative-on)
   
   ;; 设置company
-  ;; (setq company-backends '((company-dabbrev-code company-gtags)))
+  (setq company-backends '((company-dabbrev-code company-gtags)))
   (spacemacs|add-company-backends :modes text-mode)
 
   (add-hook 'doc-view-mode-hook 'auto-revert-mode)
