@@ -121,7 +121,8 @@ This function should only modify configuration layer settings."
    ;; '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
   
-   dotspacemacs-additional-packages '(company-box
+   dotspacemacs-additional-packages '(
+                                      ;;company-box
                                       doom-themes
                                       all-the-icons)
 
@@ -574,8 +575,8 @@ before packages are loaded."
     )
   (my-setup-indent 2)
 
-  (require 'company-box)
-  (add-hook 'company-mode-hook 'company-box-mode)
+  ;; (require 'company-box)
+  ;; (add-hook 'company-mode-hook 'company-box-mode)
 
   "modify typescript indent level"
   (setq-default typescript-indent-level 2)
