@@ -42,6 +42,12 @@ This function should only modify configuration layer settings."
      ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
      ;; `M-m f e R' (Emacs style) to install them.
      ;; ----------------------------------------------------------------
+     (c-c++ :variables
+            c-c++-default-mode-for-headers 'c++-mode
+            c-c++-backend 'gtags
+            c-c++-enable-google-style t
+            c-c++-enable-google-newline t
+            )
      emoji
      ranger
      colors
@@ -561,7 +567,7 @@ before packages are loaded."
     (setq standard-indent n)
     (setq tab-width n)
     ;; java/c/c++
-    (setq c-basic-offset 4)
+    (setq c-basic-offset n)
     ;; web development
     (setq coffee-tab-width n)           ; coffeescript
     (setq javascript-indent-level n)    ; javascript-mode
