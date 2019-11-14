@@ -43,7 +43,7 @@ This function should only modify configuration layer settings."
      ;; `M-m f e R' (Emacs style) to install them.
      ;; ----------------------------------------------------------------
      (c-c++ :variables
-            c-c++-default-mode-for-headers 'c++-mode
+            c-c++-default-mode-for-headers 'c-mode
             c-c++-backend 'gtags
             c-c++-enable-google-style t
             c-c++-enable-google-newline t
