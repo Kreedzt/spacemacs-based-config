@@ -23,6 +23,9 @@
 (setenv "PATH" (concat "C:\\Users\\zhaoz\\gtags\\bin;" (getenv "PATH")))
 (setq exec-path (append exec-path '("C:\\Users\\zhaoz\\gtags\\bin")))
 
+"解决Treemacs下Python3找不到问题"
+(setq treemacs-python-executable "C:\\Users\\zhaoz\\AppData\\Local\\Programs\\Python\\Python38\\python.exe")
+
 "解决LSP报错问题"
 "@see: https://emacs-china.org/t/tide-javascript/7068/24"
 (setq lsp--silent-errors
