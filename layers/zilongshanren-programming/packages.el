@@ -59,7 +59,6 @@
         (progn
           (setq imenu-create-index-function 'js2-imenu-make-index)
 
-
           (when (memq 'company-lsp company-backends)
             (setq-local company-backends (remove 'company-lsp company-backends))
             (add-to-list 'company-backends '(company-lsp :with company-dabbrev-code :separate))))))

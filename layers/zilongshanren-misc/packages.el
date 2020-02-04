@@ -1071,6 +1071,11 @@ Search for a search tool in the order provided by `dotspacemacs-search-tools'."
     (with-eval-after-load 'projectile
       (progn
         (setq projectile-completion-system 'ivy)
+        
+        ;; 修复windows下projectile不工作问题
+        (setq projectile-indexing-method 'alien)
+        (setq projectile-git-submodule-command 'nil)
+        
         (add-to-list 'projectile-other-file-alist '("html" "js"))
         (add-to-list 'projectile-other-file-alist '("js" "html"))))
 
