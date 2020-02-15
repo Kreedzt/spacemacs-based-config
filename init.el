@@ -50,7 +50,7 @@ This function should only modify configuration layer settings."
             c-c++-enable-google-style t
             c-c++-enable-google-newline t
             )
-     emoji
+     ;;emoji
      ranger
      colors
      dap
@@ -77,9 +77,11 @@ This function should only modify configuration layer settings."
      latex
      gpu
      (typescript :variables
-                 ;; typescript-backend nil
+                 typescript-backend 'tide
                  typescript-fmt-on-save nil
                  typescript-fmt-tool 'prettier
+                 typescript-linter 'eslint
+                 typescript-lsp-linter nil
                  )
      ;; (javascript :variables
      ;;             javascript-backend 'lsp)
@@ -691,7 +693,7 @@ before packages are loaded."
                           'gbk))
   ;; (add-hook 'text-mode-hook 'spacemacs/toggle-spelling-checking-on)
 
-  (add-hook 'org-mode-hook 'emojify-mode)
+  ;; (add-hook 'org-mode-hook 'emojify-mode)
   (add-hook 'org-mode-hook 'auto-fill-mode)
 
   ;; https://emacs-china.org/t/ox-hugo-auto-fill-mode-markdown/9547/4
