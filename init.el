@@ -99,7 +99,10 @@ This function should only modify configuration layer settings."
      ;; multiple-cursors
      treemacs
      ;; neotree
-     org
+     (org :variables
+          org-enable-hugo-support t
+          org-enable-bootstrap-support t
+          org-enable-github-support t)
      (latex :variables
             latex-build-command "LaTeX")
      ;; wakatime
