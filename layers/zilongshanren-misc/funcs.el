@@ -700,3 +700,8 @@ Error out if this isn't a GitHub repo."
   (interactive)
   (counsel-imenu)
   (evil-set-jump))
+
+;; 使用MultiCommander打开目录
+;; (defun kreedzt/open-in-multi-commander ()
+;;   (interactive)
+;;   (shell-command (concat "MultiCommander.exe /OPEN ") (file-name-directory (buffer-file-name))))

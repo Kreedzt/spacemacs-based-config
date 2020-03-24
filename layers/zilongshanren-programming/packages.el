@@ -44,6 +44,7 @@
         ;; editorconfig
         ;; robe
         lsp-mode
+        ;; racer
         typescript-mode
         ))
 
@@ -161,6 +162,19 @@
                                      company-gtags)
                                     company-files company-dabbrev)))
 
+;; (defun zilongshanren-programming/post-init-racer ()
+;;   (use-package racer
+;;     :requires rust-mode
+
+;;     :init (setq racer-rust-src-path
+;;                 (concat (string-trim
+;;                          (shell-command-to-string "rustc --print sysroot"))
+;;                         "/lib/rustlib/src/rust/src"))
+;;     :config
+;;     (add-hook 'rust-mode-hook #'racer-mode)
+;;     (add-hook 'racer-mode-hook #'eldoc-mode)
+;;     (add-hook 'racer-mode-hook #'company-mode)
+;;   )
 
 
 ;; (defun zilongshanren-programming/post-init-yasnippet ()

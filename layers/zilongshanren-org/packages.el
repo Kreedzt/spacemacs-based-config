@@ -563,4 +563,7 @@ holding contextual information."
   (use-package sound-wav
     :defer t
     :init))
+
+;; (use-package org
+;;   :bind (:map spacemacs-org-mode-map-root-map ("M-RET" . nil)))
 ;;; packages.el ends here

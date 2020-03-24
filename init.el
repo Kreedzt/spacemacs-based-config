@@ -1,6 +1,8 @@
 
 
 
+
+
 ;; -*- mode: emacs-lisp; lexical-binding: t -*-
 ;; This file is loaded by Spacemacs at startup.
 ;; It must be stored in your home directory.
@@ -39,6 +41,9 @@ This function should only modify configuration layer settings."
    '(yaml
      windows-scripts
      rust
+     ;; (rust :variables
+     ;;       rust-backend 'racer
+     ;;       )
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
@@ -120,10 +125,10 @@ This function should only modify configuration layer settings."
      (spacemacs-layouts :variables layouts-enable-autosave nil
                         layouts-autosave-delay 300)
      ;; version-control
-     ;; custom layer
+     ;; nextline: custom layer
      zilongshanren
      (chinese :variables
-              chinese-enable-youdao-dict t)
+            chinese-enable-youdao-dict t)
      )
 
    ;; List of additional packages that will be installed without being
@@ -323,7 +328,7 @@ It should only modify the values of Spacemacs settings."
 
    ;; Major mode leader key accessible in `emacs state' and `insert state'.
    ;; (default "C-M-m")
-   dotspacemacs-major-mode-emacs-leader-key "C-M-m"
+   dotspacemacs-major-mode-emacs-leader-key (if window-system "<M-return>" "C-M-m")
 
    ;; These variables control whether separate commands are bound in the GUI to
    ;; the key pairs `C-i', `TAB' and `C-m', `RET'.
@@ -554,6 +559,7 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
   (setq evil-shift-round nil)
   (setq byte-compile-warnings '(not obsolete))
   (setq warning-minimum-level :error)
+  (setq racer-rust-src-path "~\\.rustup\\toolchains\\stable-x86_64-pc-windows-msvc\\lib\\rustlib\\src\\rust\\src")
   )
 
 (defun dotspacemacs/user-load ()
@@ -719,6 +725,10 @@ unwanted space when exporting org-mode to hugo markdown."
   ;; fix for the lsp error
   (defvar spacemacs-jump-handlers-fundamental-mode nil)
 
+  ;; (org-defkey org-mode-map [(meta return)] 'org-meta-return)
+  (with-eval-after-load 'org 
+    (org-defkey org-mode-map [(meta return)] 'org-meta-return)  ;; The actual fix
+    )
   )
 
 ;; Do not write anything past this comment. This is where Emacs will

@@ -1,4 +1,5 @@
 
+
 ;;; config.el --- zilongshanren Layer packages File for Spacemacs
 ;;
 ;; Copyright (c) 2015-2016 zilongshanren
@@ -19,12 +20,25 @@
 
 (add-hook 'term-mode-hook 'zilongshanren/ash-term-hooks)
 
+"增加Rust环境变量"
+;; (setenv "PATH" (concat "~\\.cargo\\bin;") (getenv "PATH"))
+;; (setq exec-path (append exec-path '("~\\.cargo\\bin")))
+
+;; (with-eval-after-load 'racer
+;;   (setq racer-rust-src-path "~\\.rustup\\toolchains\\stable-x86_64-pc-windows-msvc\\lib\\rustlib\\src\\rust\\src"))
+
+;; (setq racer-rust-src-path "~\\.rustup\\toolchains\\stable-x86_64-pc-windows-msvc\\lib\\rustlib\\src\\rust\\src")
+
 "增加GTAGS环境变量"
 (setenv "PATH" (concat "C:\\Users\\zhaoz\\gtags\\bin;" (getenv "PATH")))
 (setq exec-path (append exec-path '("C:\\Users\\zhaoz\\gtags\\bin")))
 
-"解决Treemacs下Python3找不到问题"
-(setq treemacs-python-executable "C:\\Users\\zhaoz\\AppData\\Local\\Programs\\Python\\Python38\\python.exe")
+"增加MultiCommander环境变量"
+(setenv "PATH" (concat "C:\\Users\\zhaoz\\AppData\\Local\\MultiCommander (X64)" (getenv "PATH")))
+(setq exec-path (append exec-path '("C:\\Users\\zhaoz\\AppData\\Local\\MultiCommander (X64)")))
+
+;; (with-eval-after-load 'rust-mode
+;;   (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
 
 "解决LSP报错问题"
 "@see: https://emacs-china.org/t/tide-javascript/7068/24"
@@ -42,9 +56,6 @@
     (shell-command-on-region b e
                              "python -mjson.tool" (current-buffer) t)))
 
-
-
-
 (add-to-list 'auto-mode-alist (cons (concat "\\." (regexp-opt
                                                    '("xml"
                                                      "xsd"
@@ -54,13 +65,9 @@
                                                    t) "\\'") 'nxml-mode))
 (setq nxml-slash-auto-complete-flag t)
 
-
-
 (add-to-list 'auto-mode-alist '("\\.mm\\'" . objc-mode))
 (add-to-list 'auto-mode-alist '("\\.c\\'" . c++-mode))
 (add-hook 'c++-mode-hook (lambda () (company-mode 1)))
-
-
 
 ;; return nil to write content to file
 (defun zilongshanren/untabify-buffer ()
