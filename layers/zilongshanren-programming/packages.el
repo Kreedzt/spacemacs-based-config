@@ -71,6 +71,7 @@
     ;; 禁用lsp缩进冲突问题
     (custom-set-variables '(lsp-enable-indentation nil))
     (setq lsp-prefer-flymake nil)
+    ;; (push "[/\\\\]\\node_modules$" lsp-file-watch-ignored)
     ))
 
 (defun zilongshanren-programming/init-compile-dwim ()

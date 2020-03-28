@@ -20,7 +20,10 @@
 
 (add-hook 'term-mode-hook 'zilongshanren/ash-term-hooks)
 
-"增加Rust环境变量"
+;; 设置gtags
+(setq company-backends '((company-dabbrev-code company-gtags)))
+
+;; "增加Rust环境变量"
 ;; (setenv "PATH" (concat "~\\.cargo\\bin;") (getenv "PATH"))
 ;; (setq exec-path (append exec-path '("~\\.cargo\\bin")))
 
@@ -29,9 +32,9 @@
 
 ;; (setq racer-rust-src-path "~\\.rustup\\toolchains\\stable-x86_64-pc-windows-msvc\\lib\\rustlib\\src\\rust\\src")
 
-"增加GTAGS环境变量"
-(setenv "PATH" (concat "C:\\Users\\zhaoz\\gtags\\bin;" (getenv "PATH")))
-(setq exec-path (append exec-path '("C:\\Users\\zhaoz\\gtags\\bin")))
+;; "增加GTAGS环境变量"
+;; (setenv "PATH" (concat "C:\\Users\\zhaoz\\gtags\\bin;" (getenv "PATH")))
+;; (setq exec-path (append exec-path '("C:\\Users\\zhaoz\\gtags\\bin")))
 
 "增加MultiCommander环境变量"
 (setenv "PATH" (concat "C:\\Users\\zhaoz\\AppData\\Local\\MultiCommander (X64)" (getenv "PATH")))
