@@ -39,11 +39,11 @@
 
 "解决LSP报错问题"
 "@see: https://emacs-china.org/t/tide-javascript/7068/24"
-(setq lsp--silent-errors
-      '(
-        -32800                          ;default error in lsp-mode
-        -32603                          ;error that type in {...}
-        ))
+;; (setq lsp--silent-errors
+;;       '(
+;;         -32800                          ;default error in lsp-mode
+;;         -32603                          ;error that type in {...}
+;;         ))
 
 ;; reformat your json file, it requires python
 (defun beautify-json ()
@@ -68,7 +68,7 @@
 
 (add-to-list 'auto-mode-alist '("\\.mm\\'" . objc-mode))
 (add-to-list 'auto-mode-alist '("\\.c\\'" . c++-mode))
-(add-hook 'c++-mode-hook (lambda () (company-mode 1)))
+;; (add-hook 'c++-mode-hook (lambda () (company-mode 1)))
 
 
 
@@ -78,10 +78,10 @@
   (save-excursion
     (untabify (point-min) (point-max)) nil))
 
-(add-hook 'c++-mode-hook
-          #'(lambda ()
-              (add-hook 'write-contents-hooks
-                        'zilongshanren/untabify-buffer nil t)))
+;; (add-hook 'c++-mode-hook
+;;           #'(lambda ()
+;;               (add-hook 'write-contents-hooks
+;;                         'zilongshanren/untabify-buffer nil t)))
 
 (setq auto-mode-alist
       (append

@@ -75,6 +75,7 @@
     (setq lsp-prefer-flymake nil)
     ;; 提升lsp性能
     (setq company-lsp-cache-candidates t)
+    ;; 启动emacs原生json转换器: v27有效
     ;; (setq lsp-use-native-json t)
     ))
 
@@ -345,8 +346,8 @@
       (spacemacs|add-company-backends :modes shell-script-mode makefile-bsdmake-mode sh-mode lua-mode nxml-mode conf-unix-mode json-mode graphviz-dot-mode js2-mode js-mode))
     ))
 
-(defun zilongshanren-programming/post-init-company-c-headers ()
-  (progn
-    (setq company-c-headers-path-system
-          (quote
-           ("/Users/kreedzt/anaconda3/include/c++/v1")))))
+;; (defun zilongshanren-programming/post-init-company-c-headers ()
+;;   (progn
+;;     (setq company-c-headers-path-system
+;;           (quote
+;;            ("/Users/kreedzt/anaconda3/include/c++/v1")))))

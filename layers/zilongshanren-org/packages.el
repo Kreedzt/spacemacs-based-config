@@ -291,6 +291,7 @@
       (setq org-agenda-file-code-snippet (expand-file-name "snippet.org" org-agenda-dir))
       (setq org-default-notes-file (expand-file-name "gtd.org" org-agenda-dir))
       (setq org-agenda-file-blogposts (expand-file-name "all-posts.org" org-agenda-dir))
+      (setq org-agenda-files '("~/org-notes/"))
       (setq org-agenda-files (list org-agenda-dir))
 
       ;; C-n for the next org agenda item

@@ -33,13 +33,15 @@ This function should only modify configuration layer settings."
 
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(python
+   '(yaml
+     python
      rust
      nginx
      (typescript :variables
                  typescript-fmt-on-save nil
                  typescript-fmt-tool 'prettier
-                 typescript-backend nil
+                 typescript-backend 'tide
+                 typescript-lsp-linter nil
                  )
      sql
      (html :variables
@@ -71,11 +73,11 @@ This function should only modify configuration layer settings."
      ;;  :variables javascript-backend 'lsp
      ;;  )
      auto-completion
-     (lsp :variables
-          lsp-ui-sideline-enable nil
-          lsp-ui-peek-enable t
-          lsp-ui-remap-xref-keybindings t
-          )
+     ;; (lsp :variables
+     ;;      lsp-ui-sideline-enable nil
+     ;;      lsp-ui-peek-enable t
+     ;;      lsp-ui-remap-xref-keybindings t
+     ;;      )
      better-defaults
      emacs-lisp
      (git :variables
@@ -85,15 +87,22 @@ This function should only modify configuration layer settings."
           magit-revert-buffers 'silent
           magit-refs-show-commit-count 'all
           magit-revision-show-gravatars nil)
+     (c-c++ :variables
+            c-c++-default-mode-for-headers 'c-mode
+            c-c++-enable-google-style t
+            c-c++-enable-google-newline t
+            )
      markdown
      ;; multiple-cursors
      ;; neotree
      treemacs
      (org :variables org-want-todo-bindings t
-          org-enable-hugo-support t)
+          org-enable-hugo-support t
+          org-enable-bootstrap-support t
+          org-enable-github-support t
+          )
      gpu
-     (gtags :variables
-            gtags-enable-by-default t)
+     gtags
      ;; (shell :variables
      
      ;;        shell-default-height 30
@@ -528,10 +537,10 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
       "-o ControlMaster=auto -o ControlPath='tramp.%%C' -o ControlPersist=no")
 
 (setq configuration-layer-elpa-archives
-    '(("melpa-cn" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")
-      ("org-cn"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/org/")
-      ("gnu-cn"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")))
-  )
+      '(("melpa-cn" . "http://elpa.emacs-china.org/melpa/")
+        ("org-cn"   . "http://elpa.emacs-china.org/org/")
+        ("gnu-cn"   . "http://elpa.emacs-china.org/gnu/")))
+)
 
 (defun dotspacemacs/user-load ()
   "Library to load while dumping.
@@ -709,7 +718,7 @@ This function is called at the very end of Spacemacs initialization."
     ("#dc322f" "#cb4b16" "#b58900" "#546E00" "#B4C342" "#00629D" "#2aa198" "#d33682" "#6c71c4")))
  '(package-selected-packages
    (quote
-    (yapfify stickyfunc-enhance pytest pyenv-mode py-isort pippel pipenv pyvenv pip-requirements lsp-python-ms python live-py-mode importmagic epc ctable concurrent helm-pydoc helm-cscope xcscope cython-mode company-anaconda blacken anaconda-mode pythonic toml-mode racer helm-gtags ggtags flycheck-rust counsel-gtags cargo rust-mode nginx-mode tide typescript-mode sqlup-mode sql-indent web-mode tagedit slim-mode scss-mode sass-mode pug-mode impatient-mode helm-css-scss haml-mode emmet-mode counsel-css company-web web-completion-data add-node-modules-path youdao-dictionary names chinese-word-at-point yasnippet-snippets ws-butler writeroom-mode winum which-key wgrep web-beautify wakatime-mode volatile-highlights vi-tilde-fringe uuidgen use-package unfill toc-org symon string-inflection spaceline-all-the-icons solarized-theme smex smeargle rjsx-mode restart-emacs request rainbow-delimiters prettier-js popwin persp-mode pcre2el password-generator paradox overseer orgit org-projectile org-present org-pomodoro org-mime org-download org-bullets org-brain open-junk-file neotree nameless mwim move-text mmm-mode markdown-toc magit-svn magit-gitflow macrostep lorem-ipsum livid-mode link-hint json-navigator json-mode js2-refactor js-doc ivy-yasnippet ivy-xref ivy-purpose ivy-hydra indent-guide hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-make google-translate golden-ratio gnuplot gitignore-templates gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md fuzzy font-lock+ flyspell-correct-ivy flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-org evil-numbers evil-nerd-commenter evil-matchit evil-magit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-escape evil-ediff evil-cleverparens evil-args evil-anzu eval-sexp-fu elisp-slime-nav editorconfig dumb-jump dotenv-mode doom-modeline diminish define-word counsel-projectile company-tern company-statistics column-enforce-mode clean-aindent-mode centered-cursor-mode auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile aggressive-indent ace-window ace-link ac-ispell)))
+    (yaml-mode cpp-auto-include yapfify stickyfunc-enhance pytest pyenv-mode py-isort pippel pipenv pyvenv pip-requirements lsp-python-ms python live-py-mode importmagic epc ctable concurrent helm-pydoc helm-cscope xcscope cython-mode company-anaconda blacken anaconda-mode pythonic toml-mode racer helm-gtags ggtags flycheck-rust counsel-gtags cargo rust-mode nginx-mode tide typescript-mode sqlup-mode sql-indent web-mode tagedit slim-mode scss-mode sass-mode pug-mode impatient-mode helm-css-scss haml-mode emmet-mode counsel-css company-web web-completion-data add-node-modules-path youdao-dictionary names chinese-word-at-point yasnippet-snippets ws-butler writeroom-mode winum which-key wgrep web-beautify wakatime-mode volatile-highlights vi-tilde-fringe uuidgen use-package unfill toc-org symon string-inflection spaceline-all-the-icons solarized-theme smex smeargle rjsx-mode restart-emacs request rainbow-delimiters prettier-js popwin persp-mode pcre2el password-generator paradox overseer orgit org-projectile org-present org-pomodoro org-mime org-download org-bullets org-brain open-junk-file neotree nameless mwim move-text mmm-mode markdown-toc magit-svn magit-gitflow macrostep lorem-ipsum livid-mode link-hint json-navigator json-mode js2-refactor js-doc ivy-yasnippet ivy-xref ivy-purpose ivy-hydra indent-guide hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-make google-translate golden-ratio gnuplot gitignore-templates gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md fuzzy font-lock+ flyspell-correct-ivy flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-org evil-numbers evil-nerd-commenter evil-matchit evil-magit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-escape evil-ediff evil-cleverparens evil-args evil-anzu eval-sexp-fu elisp-slime-nav editorconfig dumb-jump dotenv-mode doom-modeline diminish define-word counsel-projectile company-tern company-statistics column-enforce-mode clean-aindent-mode centered-cursor-mode auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile aggressive-indent ace-window ace-link ac-ispell)))
  '(pos-tip-background-color "#eee8d5")
  '(pos-tip-foreground-color "#586e75")
  '(smartrep-mode-line-active-bg (solarized-color-blend "#859900" "#eee8d5" 0.2))
@@ -754,3 +763,4 @@ This function is called at the very end of Spacemacs initialization."
  ;; If there is more than one, they won't work right.
  )
 )
+
