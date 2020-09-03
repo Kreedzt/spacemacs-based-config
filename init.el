@@ -33,7 +33,12 @@ This function should only modify configuration layer settings."
 
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(yaml
+   '(
+     (go :variables
+         go-tab-width 2
+         go-format-before-save nil
+         go-backend 'lsp)
+     yaml
      python
      rust
      nginx
@@ -64,7 +69,7 @@ This function should only modify configuration layer settings."
      ;; wakatime
      (wakatime :variables
                wakatime-api-key "61055c82-e3d6-46c9-8757-7f9e60019d6b"
-               wakatime-cli-path "/Users/kreedzt/anaconda3/bin/wakatime")
+               wakatime-cli-path "/usr/local/bin/wakatime")
      ;; js
      (javascript :variables
                  javascript-backend 'nil
@@ -91,6 +96,7 @@ This function should only modify configuration layer settings."
             c-c++-default-mode-for-headers 'c-mode
             c-c++-enable-google-style t
             c-c++-enable-google-newline t
+            c-c++-backend 'lsp-clangd
             )
      markdown
      ;; multiple-cursors
@@ -134,7 +140,10 @@ This function should only modify configuration layer settings."
    dotspacemacs-additional-packages '(doom-themes
                                       all-the-icons
                                       youdao-dictionary
+                                      restclient
+                                      company-restclient
                                       )
+   
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -525,7 +534,14 @@ This function defines the environment variables for your Emacs session. By
 default it calls `spacemacs/load-spacemacs-env' which loads the environment
 variables declared in `~/.spacemacs.env' or `~/.spacemacs.d/.spacemacs.env'.
 See the header of this file for more information."
-  (spacemacs/load-spacemacs-env))
+  (spacemacs/load-spacemacs-env)
+    ;; (when (memq window-system '(mac ns))
+    ;;   :ensure t
+    ;;   :config
+    ;;   (setq exec-path-from-shell-arguments '("-l"))
+    ;;   (exec-path-from-shell-initialize))
+  )
+
 
 (defun dotspacemacs/user-init ()
   "Initialization for user code:
@@ -547,7 +563,7 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
 This function is called only while dumping Spacemacs configuration. You can
 `require' or `load' the libraries of your choice that will be included in the
 dump."
-
+  (require 'restclient)
   )
 
 (defun dotspacemacs/user-config ()
@@ -579,8 +595,8 @@ before packages are loaded."
   "Eslint fix file"
   (defun eslint-fix-file ()
     (interactive)
-    (message "eslint --fixing the file" (buffer-file-name))
-    (shell-command (concat "eslint --fix " (buffer-file-name))))
+    (message "npx eslint --fixing the file" (buffer-file-name))
+    (shell-command (concat "npx eslint --fix " (buffer-file-name))))
 
   (defun eslint-fix-file-and-revert ()
     (interactive)
@@ -599,6 +615,7 @@ before packages are loaded."
   
   ;; 设置company
   (setq company-backends '((company-dabbrev-code company-gtags)))
+  (add-to-list 'company-backends 'company-restclient)
   (spacemacs|add-company-backends :modes text-mode)
 
   (add-hook 'doc-view-mode-hook 'auto-revert-mode)
@@ -660,6 +677,19 @@ unwanted space when exporting org-mode to hugo markdown."
   ;; fix for the lsp error
   (defvar spacemacs-jump-handlers-fundamental-mode nil)
 
+  ;; 修复 org-mode M-RET 问题
+  ;; https://github.com/syl20bnr/spacemacs/issues/9603
+  ;; (org-defkey org-mode-map [(meta return)] 'org-meta-return)
+
+  ;; (use-package org
+  ;;   :bind (:map spacemacs-org-mode-map-root-map))
+
+  ;; TODO: 未生效
+  (with-eval-after-load 'org 
+    (org-defkey org-mode-map [(meta return)] 'org-meta-return)  ;; The actual fix
+    )
+
+  ;; dotspacemacs-major-mode-leader-key (if window-system "<M-return>" "C-M-m")
   )
 
 ;; (setq custom-file (expand-file-name "custom.el" dotspacemacs-directory))
@@ -684,7 +714,7 @@ This function is called at the very end of Spacemacs initialization."
  '(cua-read-only-cursor-color "#859900")
  '(custom-safe-themes
    (quote
-    ("d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "fa2b58bb98b62c3b8cf3b6f02f058ef7827a8e497125de0254f56e373abee088" default)))
+    ("0cb1b0ea66b145ad9b9e34c850ea8e842c4c4c83abe04e37455a1ef4cc5b8791" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "fa2b58bb98b62c3b8cf3b6f02f058ef7827a8e497125de0254f56e373abee088" default)))
  '(evil-want-Y-yank-to-eol nil)
  '(fci-rule-color "#eee8d5")
  '(highlight-changes-colors (quote ("#d33682" "#6c71c4")))
@@ -711,16 +741,23 @@ This function is called at the very end of Spacemacs initialization."
    (quote
     ("#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3")))
  '(hl-paren-colors (quote ("#2aa198" "#b58900" "#268bd2" "#6c71c4" "#859900")))
+ '(jdee-db-active-breakpoint-face-colors (cons "#FFFBF0" "#268bd2"))
+ '(jdee-db-requested-breakpoint-face-colors (cons "#FFFBF0" "#859900"))
+ '(jdee-db-spec-breakpoint-face-colors (cons "#FFFBF0" "#E1DBCD"))
  '(lsp-enable-indentation nil)
  '(magit-diff-use-overlays nil)
  '(nrepl-message-colors
    (quote
     ("#dc322f" "#cb4b16" "#b58900" "#546E00" "#B4C342" "#00629D" "#2aa198" "#d33682" "#6c71c4")))
+ '(objed-cursor-color "#dc322f")
  '(package-selected-packages
    (quote
-    (yaml-mode cpp-auto-include yapfify stickyfunc-enhance pytest pyenv-mode py-isort pippel pipenv pyvenv pip-requirements lsp-python-ms python live-py-mode importmagic epc ctable concurrent helm-pydoc helm-cscope xcscope cython-mode company-anaconda blacken anaconda-mode pythonic toml-mode racer helm-gtags ggtags flycheck-rust counsel-gtags cargo rust-mode nginx-mode tide typescript-mode sqlup-mode sql-indent web-mode tagedit slim-mode scss-mode sass-mode pug-mode impatient-mode helm-css-scss haml-mode emmet-mode counsel-css company-web web-completion-data add-node-modules-path youdao-dictionary names chinese-word-at-point yasnippet-snippets ws-butler writeroom-mode winum which-key wgrep web-beautify wakatime-mode volatile-highlights vi-tilde-fringe uuidgen use-package unfill toc-org symon string-inflection spaceline-all-the-icons solarized-theme smex smeargle rjsx-mode restart-emacs request rainbow-delimiters prettier-js popwin persp-mode pcre2el password-generator paradox overseer orgit org-projectile org-present org-pomodoro org-mime org-download org-bullets org-brain open-junk-file neotree nameless mwim move-text mmm-mode markdown-toc magit-svn magit-gitflow macrostep lorem-ipsum livid-mode link-hint json-navigator json-mode js2-refactor js-doc ivy-yasnippet ivy-xref ivy-purpose ivy-hydra indent-guide hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-make google-translate golden-ratio gnuplot gitignore-templates gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md fuzzy font-lock+ flyspell-correct-ivy flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-org evil-numbers evil-nerd-commenter evil-matchit evil-magit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-escape evil-ediff evil-cleverparens evil-args evil-anzu eval-sexp-fu elisp-slime-nav editorconfig dumb-jump dotenv-mode doom-modeline diminish define-word counsel-projectile company-tern company-statistics column-enforce-mode clean-aindent-mode centered-cursor-mode auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile aggressive-indent ace-window ace-link ac-ispell)))
+    (godoctor go-tag go-rename go-impl go-guru go-gen-test go-fill-struct go-eldoc flycheck-golangci-lint company-go go-mode gnu-elpa-keyring-update yaml-mode cpp-auto-include yapfify stickyfunc-enhance pytest pyenv-mode py-isort pippel pipenv pyvenv pip-requirements lsp-python-ms python live-py-mode importmagic epc ctable concurrent helm-pydoc helm-cscope xcscope cython-mode company-anaconda blacken anaconda-mode pythonic toml-mode racer helm-gtags ggtags flycheck-rust counsel-gtags cargo rust-mode nginx-mode tide typescript-mode sqlup-mode sql-indent web-mode tagedit slim-mode scss-mode sass-mode pug-mode impatient-mode helm-css-scss haml-mode emmet-mode counsel-css company-web web-completion-data add-node-modules-path youdao-dictionary names chinese-word-at-point ws-butler writeroom-mode winum wgrep web-beautify wakatime-mode volatile-highlights vi-tilde-fringe uuidgen unfill toc-org symon string-inflection spaceline-all-the-icons solarized-theme smex smeargle rjsx-mode restart-emacs request rainbow-delimiters prettier-js popwin persp-mode pcre2el password-generator paradox overseer orgit org-projectile org-present org-pomodoro org-mime org-download org-bullets org-brain open-junk-file neotree nameless mwim move-text mmm-mode markdown-toc magit-svn magit-gitflow macrostep lorem-ipsum livid-mode link-hint json-navigator json-mode js2-refactor js-doc ivy-yasnippet ivy-xref ivy-purpose ivy-hydra indent-guide hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-make google-translate golden-ratio gnuplot gitignore-templates gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md fuzzy font-lock+ flyspell-correct-ivy flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-org evil-numbers evil-nerd-commenter evil-matchit evil-magit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-escape evil-ediff evil-cleverparens evil-args evil-anzu eval-sexp-fu elisp-slime-nav editorconfig dumb-jump dotenv-mode doom-modeline diminish define-word counsel-projectile company-tern company-statistics column-enforce-mode clean-aindent-mode centered-cursor-mode auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile aggressive-indent ace-window ace-link ac-ispell)))
+ '(pdf-view-midnight-colors (cons "#556b72" "#FDF6E3"))
  '(pos-tip-background-color "#eee8d5")
  '(pos-tip-foreground-color "#586e75")
+ '(rustic-ansi-faces
+   ["#FDF6E3" "#dc322f" "#859900" "#b58900" "#268bd2" "#d33682" "#2aa198" "#556b72"])
  '(smartrep-mode-line-active-bg (solarized-color-blend "#859900" "#eee8d5" 0.2))
  '(tab-width 2)
  '(term-default-bg-color "#fdf6e3")
