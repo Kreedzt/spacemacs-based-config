@@ -60,7 +60,7 @@ This function should only modify configuration layer settings."
      ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
      ;; `M-m f e R' (Emacs style) to install them.
      ;; ----------------------------------------------------------------
-     emoji
+     ;; emoji
      ranger
      colors
      dap
@@ -654,7 +654,7 @@ before packages are loaded."
                                    (ivy--regex input t)))
                           'gbk))
   
-  (add-hook 'org-mode-hook 'emojify-mode)
+  ;; (add-hook 'org-mode-hook 'emojify-mode)
   (add-hook 'org-mode-hook 'auto-fill-mode)
   
   ;; https://emacs-china.org/t/ox-hugo-auto-fill-mode-markdown/9547/4
