@@ -21,6 +21,9 @@
 
 (add-hook 'term-mode-hook 'zilongshanren/ash-term-hooks)
 
+(add-to-list 'exec-path "/usr/bin/sqlite3")
+(setq org-roam-directory "~/org-roam")
+
 ;; (add-hook 'c-mode-hook 'company-mode-hook)
 ;; (add-hook 'cc-mode 'company-mode-hook)
 ;; (add-hook 'c++-mode 'company-mode-hook)

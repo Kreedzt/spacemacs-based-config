@@ -142,6 +142,7 @@ This function should only modify configuration layer settings."
                                       youdao-dictionary
                                       restclient
                                       company-restclient
+                                      org-roam
                                       )
    
 

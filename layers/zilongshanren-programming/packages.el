@@ -45,11 +45,16 @@
         ;; exec-path-from-shell
         lsp-mode
         typescript-mode
+        org-roam
         ))
 
 (defun zilongshanren-programming/post-init-typescript-mode ()
   (add-hook 'typescript-mode-hook 'my-ts-mode-hook)
   (company-mode '((company-dabbrev-mode :width company-keywords company-gtags) company-files company-dabbrev))
+  )
+
+(defun zilongshanren-programming/post-init-org-roam ()
+  (add-hook 'after-init-hook 'org-roam-mode)
   )
 
 (defun zilongshanren-programming/post-init-lsp-mode ()
@@ -77,6 +82,9 @@
     (setq company-lsp-cache-candidates t)
     ;; 启动emacs原生json转换器: v27有效
     ;; (setq lsp-use-native-json t)
+    ;; 设置 Rust 后端为 RA (低配电脑慎用)
+    ;; (setq lsp-rust-server 'rust-analyzer)
+    (setq lsp-rust-server 'rls)
     ))
 
 (defun zilongshanren-programming/init-compile-dwim ()
