@@ -143,6 +143,8 @@ This function should only modify configuration layer settings."
                                       restclient
                                       company-restclient
                                       org-roam
+                                      ;;org-roam-protocol
+                                      org-roam-server
                                       )
    
 
@@ -151,6 +153,7 @@ This function should only modify configuration layer settings."
 
    ;; A list of packages that will not be installed and loaded.
    dotspacemacs-excluded-packages '(
+                                    evil-ace-jump-char-mode evil-ace-jump-line-mode evil-ace-jump-word-mode evil-ace-jump-char-to-mode
                                     org-projectile org-brain magit-gh-pulls magit-gitflow  evil-mc realgud tern company-tern tern-mode
                                     evil-args evil-ediff evil-exchange evil-unimpaired
                                     evil-indent-plus volatile-highlights smartparens
@@ -565,6 +568,7 @@ This function is called only while dumping Spacemacs configuration. You can
 `require' or `load' the libraries of your choice that will be included in the
 dump."
   (require 'restclient)
+  (require 'org-roam-protocol)
   )
 
 (defun dotspacemacs/user-config ()
