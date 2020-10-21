@@ -72,6 +72,7 @@
     (custom-set-variables '(lsp-enable-indentation nil))
     (setq lsp-prefer-flymake nil)
     ;; (push "[/\\\\]\\node_modules$" lsp-file-watch-ignored)
+    (setq lsp-rust-server 'rust-analyzer)
     ))
 
 (defun zilongshanren-programming/init-compile-dwim ()
@@ -405,8 +406,8 @@
     ;; enable dabbrev-expand in company completion https://emacs-china.org/t/topic/6381
     (setq company-dabbrev-char-regexp "[\\.0-9a-z-_'/]")
 
-    (setq company-minimum-prefix-length 1
-          company-idle-delay 0.08)
+    ;; (setq company-minimum-prefix-length 1
+    ;;       company-idle-delay 0.08)
 
     (when (configuration-layer/package-usedp 'company)
       (spacemacs|add-company-backends :modes shell-script-mode makefile-bsdmake-mode sh-mode lua-mode nxml-mode conf-unix-mode json-mode graphviz-dot-mode js2-mode js-mode))

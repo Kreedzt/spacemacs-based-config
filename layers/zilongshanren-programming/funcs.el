@@ -25,15 +25,15 @@ comment box."
 
 
 ;; "http://stackoverflow.com/questions/2242572/emacs-todo-indicator-at-left-side"
-(defun zilongshanren/annotate-todo ()
-  "put fringe marker on TODO: lines in the curent buffer"
-  (interactive)
-  (save-excursion
-    (goto-char (point-min))
-    (while (re-search-forward "TODO:" nil t)
-      (let ((overlay (make-overlay (- (point) 5) (point))))
-        (overlay-put overlay 'before-string (propertize "A"
-                                                        'display '(left-fringe right-triangle)))))))
+;; (defun zilongshanren/annotate-todo ()
+;;   "put fringe marker on TODO: lines in the curent buffer"
+;;   (interactive)
+;;   (save-excursion
+;;     (goto-char (point-min))
+;;     (while (re-search-forward "TODO:" nil t)
+;;       (let ((overlay (make-overlay (- (point) 5) (point))))
+;;         (overlay-put overlay 'before-string (propertize "A"
+;;                                                         'display '(left-fringe right-triangle)))))))
 
 
 ;;js2-mode enhancement

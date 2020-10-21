@@ -41,7 +41,7 @@ This function should only modify configuration layer settings."
    dotspacemacs-configuration-layers
    '(yaml
      windows-scripts
-     rust
+    rust
      ;; (rust :variables
      ;;       rust-backend 'racer
      ;;       )
@@ -70,7 +70,7 @@ This function should only modify configuration layer settings."
                       :disabled-for org markdown)
      better-defaults
      emacs-lisp
-     gtags
+     ;; gtags
      (git :variables
           git-magit-status-fullscreen t
           magit-push-always-verify nil
@@ -92,10 +92,11 @@ This function should only modify configuration layer settings."
      ;; (javascript :variables
      ;;             javascript-backend 'lsp)
      javascript
-     (lsp :variables
-          lsp-ui-sideline-enable nil
-          lsp-ui-peek-enable t
-          lsp-ui-remap-xref-keybindings t)
+     ;(lsp :variables
+          ;;lsp-ui-sideline-enable nil
+          ;;lsp-ui-peek-enable t
+          ;;lsp-ui-remap-xref-keybindings t
+          ;;)
      sql
      (html :variables
            css-enable-lsp t
@@ -111,11 +112,12 @@ This function should only modify configuration layer settings."
           org-enable-github-support t)
      (latex :variables
             latex-build-command "LaTeX")
+     pdf
      ;; wakatime
-     (wakatime :variables
-               wakatime-api-key "61055c82-e3d6-46c9-8757-7f9e60019d6b"
-               wakatime-cli-path "c:/Users/zhaoz/AppData/Local/Programs/Python/Python38/Scripts/wakatime.exe"
-               )
+     ;;(wakatime :variables
+      ;;         wakatime-api-key "61055c82-e3d6-46c9-8757-7f9e60019d6b"
+       ;;        wakatime-cli-path "c:/Users/zhaoz/AppData/Local/Programs/Python/Python38/Scripts/wakatime.exe"
+        ;;       )
      ;; (shell :variables
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
@@ -128,7 +130,7 @@ This function should only modify configuration layer settings."
      ;; version-control
      ;; nextline: custom layer
      zilongshanren
-     (chinese :variables
+      (chinese :variables
             chinese-enable-youdao-dict t)
      )
 
@@ -139,7 +141,7 @@ This function should only modify configuration layer settings."
    ;; To use a local version of a package, use the `:location' property:
    ;; '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-  
+
    dotspacemacs-additional-packages '(
                                       ;;company-box
                                       doom-themes
@@ -543,7 +545,7 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
   (setq tramp-ssh-controlmaster-options
         "-o ControlMaster=auto -o ControlPath='tramp.%%C' -o ControlPersist=no")
   (delete-selection-mode t)
-  (add-hook 'prog-mode-hook 'spacemacs/toggle-hungry-delete-on)
+  ;;(add-hook 'prog-mode-hook 'spacemacs/toggle-hungry-delete-on)
   (setq configuration-layer-elpa-archives
         '(("melpa-cn" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")
           ("org-cn"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/org/")
@@ -557,10 +559,11 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
 
   ;; ss proxy. But it will cause anacond-mode failed.
   ;; (setq socks-server '("Default server" "127.0.0.1" 1080 5))
-  (setq evil-shift-round nil)
-  (setq byte-compile-warnings '(not obsolete))
-  (setq warning-minimum-level :error)
-  (setq racer-rust-src-path "~\\.rustup\\toolchains\\stable-x86_64-pc-windows-msvc\\lib\\rustlib\\src\\rust\\src")
+ ;; (setq evil-shift-round nil)
+  ;;(setq byte-compile-warnings '(not obsolete))
+ ;; (setq warning-minimum-level :error)
+  ;;(setq racer-rust-src-path "~\\.rustup\\toolchains\\stable-x86_64-pc-windows-msvc\\lib\\rustlib\\src\\rust\\src")
+  ;;(require 'doom-themes)
   )
 
 (defun dotspacemacs/user-load ()
@@ -628,7 +631,7 @@ before packages are loaded."
     (dolist (charset '(kana han symbol cjk-misc bopomofo))
       (set-fontset-font (frame-parameter nil 'font)
                         charset
-                        (font-spec :family "WenQuanYi Micro Hei Mono" :size 28))))
+                        (font-spec :family "YaHei Consolas Hybrid" :size 28))))
 
   (fset 'evil-visual-update-x-selection 'ignore)
 
