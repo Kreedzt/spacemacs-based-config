@@ -20,7 +20,7 @@
         caps-lock
         ;; cmake-font-lock
         ;; cmake-mode
-        flycheck
+        ;; flycheck
         (nodejs-repl-eval :location local)
         (compile-dwim :location local)
         js2-mode
@@ -49,8 +49,8 @@
         ))
 
 (defun zilongshanren-programming/post-init-typescript-mode ()
-  (add-hook 'typescript-mode-hook 'my-ts-mode-hook)
-  (company-mode '((company-dabbrev-mode :width company-keywords company-gtags) company-files company-dabbrev))
+  ;; (add-hook 'typescript-mode-hook 'my-ts-mode-hook)
+  (company-mode '((company-dabbrev-mode :width company-keywords) company-files company-dabbrev))
   )
 
 (defun zilongshanren-programming/post-init-org-roam ()
@@ -71,7 +71,10 @@
             (setq-local company-backends (remove 'company-lsp company-backends))
             (add-to-list 'company-backends '(company-lsp :with company-dabbrev-code :separate))))))
 
-    (add-hook 'lsp-after-open-hook 'zilongshanren-refresh-imenu-index)
+    ;; (add-hook 'lsp-after-open-hook 'zilongshanren-refresh-imenu-index)
+
+    (setq lsp-eldoc-render-all nil)
+    (setq lsp-ui-doc-enable nil)
 
 
     (setq lsp-auto-configure t)
@@ -187,7 +190,6 @@
     (web-mode-dom-errors-show))
   (setq company-backends-web-mode '((company-dabbrev-code
                                      company-keywords
-                                     company-gtags
                                      )
                                     company-files company-dabbrev)))
 
@@ -202,15 +204,15 @@
 
 
 
-(defun zilongshanren-programming/init-flycheck-package ()
-  (use-package flycheck-package))
+;; (defun zilongshanren-programming/init-flycheck-package ()
+;;   (use-package flycheck-package))
 
-(defun zilongshanren-programming/post-init-flycheck ()
-  (with-eval-after-load 'flycheck
-    (progn
-      (setq flycheck-display-errors-delay 0.9)
-      (setq flycheck-idle-change-delay 2.0)
-      )))
+;; (defun zilongshanren-programming/post-init-flycheck ()
+;;   (with-eval-after-load 'flycheck
+;;     (progn
+;;       (setq flycheck-display-errors-delay 0.9)
+;;       (setq flycheck-idle-change-delay 2.0)
+;;       )))
 
 (defun zilongshanren-programming/post-init-eldoc ()
   (setq eldoc-idle-delay 0.4))
@@ -257,11 +259,11 @@
     (spacemacs|define-jump-handlers js2-mode)
     ;; (add-hook 'spacemacs-jump-handlers-js2-mode 'etags-select-find-tag-at-point)
 
-    (setq company-backends-js2-mode '((company-dabbrev-code :with company-keywords company-gtags
+    (setq company-backends-js2-mode '((company-dabbrev-code :with company-keywords 
                                                             )
                                       company-files company-dabbrev))
 
-    (setq company-backends-js-mode '((company-dabbrev-code :with company-keywords company-gtags
+    (setq company-backends-js-mode '((company-dabbrev-code :with company-keywords
                                                            )
                                      company-files company-dabbrev))
 
@@ -339,11 +341,11 @@
     :defer t
     ))
 
-(defun zilongshanren-programming/init-flycheck-clojure ()
-  (use-package flycheck-clojure
-    :defer t
-    :init
-    (eval-after-load 'flycheck '(flycheck-clojure-setup))))
+;; (defun zilongshanren-programming/init-flycheck-clojure ()
+;;   (use-package flycheck-clojure
+;;     :defer t
+;;     :init
+;;     (eval-after-load 'flycheck '(flycheck-clojure-setup))))
 
 (defun zilongshanren-programming/post-init-company ()
   (progn

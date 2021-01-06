@@ -123,6 +123,7 @@ This function should only modify configuration layer settings."
                       syntax-checking-enable-tooltips nil)
      (spacemacs-layouts :variables layouts-enable-autosave nil
                         layouts-autosave-delay 300)
+     pdf
      ;; chinese
      (chinese :variables
               chinese-enable-youdao-dict t)
@@ -569,6 +570,9 @@ This function is called only while dumping Spacemacs configuration. You can
 dump."
   (require 'restclient)
   (require 'org-roam-protocol)
+  (require 'dap-chrome)
+  ;; (require 'dap-lldb)
+  (require 'dap-gdb-lldb)
   )
 
 (defun dotspacemacs/user-config ()
@@ -619,7 +623,7 @@ before packages are loaded."
   ;; (linum-relative-on)
   
   ;; 设置company
-  (setq company-backends '((company-dabbrev-code company-gtags)))
+  (setq company-backends '((company-dabbrev-code)))
   (add-to-list 'company-backends 'company-restclient)
   (spacemacs|add-company-backends :modes text-mode)
 

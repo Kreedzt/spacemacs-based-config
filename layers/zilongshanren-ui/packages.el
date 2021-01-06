@@ -65,7 +65,7 @@ This segment overrides the modeline functionality of `org-mode-line-string'."
           :separator " | ")
          major-mode
          process
-         (flycheck-error flycheck-warning flycheck-info)
+         ;; (flycheck-error flycheck-warning flycheck-info)
          ;; (python-pyvenv :fallback python-pyenv)
          ((minor-modes :separator spaceline-minor-modes-separator) :when active)
          (org-pomodoro :when active)

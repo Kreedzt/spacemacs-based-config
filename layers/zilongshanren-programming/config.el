@@ -36,6 +36,9 @@
       org-roam-server-network-label-truncate-length 60
       org-roam-server-network-label-wrap-length 20)
 
+"native debug设置"
+(setq dap-gdb-lldb-path "/Users/kreedzt/Documents/webfreak.debug")
+
 ;; (add-hook 'c-mode-hook 'company-mode-hook)
 ;; (add-hook 'cc-mode 'company-mode-hook)
 ;; (add-hook 'c++-mode 'company-mode-hook)

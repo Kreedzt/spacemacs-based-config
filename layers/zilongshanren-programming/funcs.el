@@ -81,19 +81,19 @@ comment box."
   (when (eq this-command 'eval-expression)
     (lispy-mode 1)))
 
-(defun my-ts-mode-hook ()
-  (when (or
-         (eq major-mode 'typescript-mode)
-         (eq major-mode 'typescript-tsx-mode)
-         )
-    (progn
-      (with-eval-after-load 'flycheck
-        (add-to-list 'flycheck-disabled-checkers 'javascript-eslint)
-        (flycheck-disable-checker 'javascript-eslint)
-        )
-      )
-    )
-  )
+;; (defun my-ts-mode-hook ()
+;;   (when (or
+;;          (eq major-mode 'typescript-mode)
+;;          (eq major-mode 'typescript-tsx-mode)
+;;          )
+;;     (progn
+;;       (with-eval-after-load 'flycheck
+;;         (add-to-list 'flycheck-disabled-checkers 'javascript-eslint)
+;;         (flycheck-disable-checker 'javascript-eslint)
+;;         )
+;;       )
+;;     )
+;;   )
 
 
 ;; (defun my-js2-mode-hook ()
