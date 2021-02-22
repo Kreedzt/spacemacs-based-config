@@ -11,6 +11,7 @@
 ;;
 ;;; License: GPLv3
 
+
 (spacemacs|add-toggle iimage
   :status iimage-mode
   :on (iimage-mode)

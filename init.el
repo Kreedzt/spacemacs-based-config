@@ -83,7 +83,7 @@ This function should only modify configuration layer settings."
      latex
      gpu
      (typescript :variables
-                 typescript-backend 'tide
+                 typescript-backend 'lsp
                  typescript-fmt-on-save nil
                  typescript-fmt-tool 'prettier
                  typescript-linter 'eslint
@@ -114,10 +114,10 @@ This function should only modify configuration layer settings."
             latex-build-command "LaTeX")
      pdf
      ;; wakatime
-     ;;(wakatime :variables
-      ;;         wakatime-api-key "61055c82-e3d6-46c9-8757-7f9e60019d6b"
-       ;;        wakatime-cli-path "c:/Users/zhaoz/AppData/Local/Programs/Python/Python38/Scripts/wakatime.exe"
-        ;;       )
+     (wakatime :variables
+               wakatime-api-key "61055c82-e3d6-46c9-8757-7f9e60019d6b"
+               wakatime-cli-path "C:\\Users\\Ken Zhao\\AppData\\Roaming\\WakaTime\\wakatime-cli\\wakatime-cli.exe"
+               )
      ;; (shell :variables
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
@@ -144,6 +144,7 @@ This function should only modify configuration layer settings."
 
    dotspacemacs-additional-packages '(
                                       ;;company-box
+                                      restclient
                                       doom-themes
                                       all-the-icons)
 
@@ -564,6 +565,9 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
  ;; (setq warning-minimum-level :error)
   ;;(setq racer-rust-src-path "~\\.rustup\\toolchains\\stable-x86_64-pc-windows-msvc\\lib\\rustlib\\src\\rust\\src")
   ;;(require 'doom-themes)
+
+  ;; 设置 pdf-tools
+  (setq pdf-info-epdfinfo-program '"C:\\Users\\Ken Zhao\\AppData\\Roaming\\emax\\elpa\\pdf-tools-20200512.1524\\epdfinfo.exe")
   )
 
 (defun dotspacemacs/user-load ()
@@ -654,6 +658,8 @@ before packages are loaded."
   (add-to-list 'auto-mode-alist
                '("Capstanfile\\'" . yaml-mode))
 
+  (add-to-list 'auto-mode-alist
+               '("\\.pdf\\'" . pdf-view-mode))
   
   (setq inhibit-compacting-font-caches t)
   (global-display-line-numbers-mode -1)
